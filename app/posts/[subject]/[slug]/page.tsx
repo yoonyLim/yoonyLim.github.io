@@ -13,9 +13,12 @@ export default function PostPage(props: any) {
     const content = getPostContent(subject, slug);
 
     return (
-        <div className="prose">
+        // class "prose" is to revert tailwindcss in markdowns
+        <div className="w-full">
             <h1>{ decodeURI(slug) }</h1>
-            <MDXRemote source={content} />
+            <div className="prose max-w-none">
+                <MDXRemote source={content} />
+            </div>
         </div>
     );
 }

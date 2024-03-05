@@ -1,24 +1,29 @@
-import fs from "fs";
-import { MDXRemote } from "next-mdx-remote/rsc";
-
-const getPostContent = (subject: string, slug: string) => {
-    const folder = "mdposts/" + subject + "/";
-    const file = `${folder}${decodeURI(slug)}.md`;
-    return fs.readFileSync(file, "utf8");
-}
+import getPostContent from "@/utils/getPostContent";
+import Markdown from "markdown-to-jsx";
+import matter from "gray-matter";
+import getPostMetadata from "@/utils/getPostMetadata";
 
 export default function PostPage(props: any) {
     const subject = props.params.subject;
     const slug = props.params.slug;
-    const content = getPostContent(subject, slug);
+    const post = matter(getPostContent(subject, slug));
 
     return (
         // class "prose" is to revert tailwindcss in markdowns
         <div className="w-full">
-            <h1>{ decodeURI(slug) }</h1>
-            <div className="prose max-w-none">
-                <MDXRemote source={content} />
-            </div>
+            <h1>{ post.data.title }</h1>
+            <article className="prose max-w-none">
+                <Markdown>{ post.content }</Markdown>
+            </article>
         </div>
     );
+}
+
+// return slug in order to make the website static by statically loading all the posts, not dynamically
+export const generateStaticParams = async () => {
+    const posts = getPostMetadata("all");
+    return posts.map((post) => ({
+        subject: post.subject,
+        slug: post.slug
+    }));
 }

@@ -8,6 +8,6 @@ export default function HomePage() {
   ))
 
   return (
-    <div>{ postPreviews }</div>
+    <div className="grid md:grid-cols-2 gap-4">{ postPreviews }</div>
   );
 }

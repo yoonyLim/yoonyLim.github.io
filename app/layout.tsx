@@ -25,7 +25,7 @@ export default function RootLayout({
 
   const footer = (
     <footer>
-      <div>
+      <div className="h-20 flex items-center">
         <div>
           <div>Github</div>
           <div>© 2024 Hayoon Lim</div>

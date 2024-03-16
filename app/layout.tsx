@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import { Provider } from "@/components/Provider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,33 +17,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const header = (
-    <header>
-      <div className="h-14 flex items-center">
-        <Link href="/">Yoony's Blog</Link>
-      </div>
-    </header>
-  )
-
-  const footer = (
-    <footer>
-      <div className="h-20 flex items-center">
-        <div>
-          <div>Github</div>
-          <div>© 2024 Hayoon Lim</div>
-        </div>
-      </div>
-    </footer>
-  )
-
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="px-20">
-          <div>{ header }</div>
-          <div>{ children }</div>
-          <div>{ footer }</div>
-        </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-gray-50 text-black dark:bg-[#181818] dark:text-white`} >
+          {/*Provider is used to suppress different rendering data between the server side and the client side when using Dark Mode*/}
+          <Provider>
+            <div>
+              <Header />
+              <div>{ children }</div>
+              <Footer />
+            </div>
+          </Provider>
       </body>
     </html>
   );

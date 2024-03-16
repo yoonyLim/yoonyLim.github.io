@@ -10,10 +10,10 @@ export default function PostPage(props: any) {
 
     return (
         // class "prose" is to revert tailwindcss in markdowns
-        <div className="w-full">
-            <h1>{ post.data.date }</h1>
+        <div className="w-full px-20">
+            <h1 className="my-4">작성일: { post.data.date }</h1>
             <h1>{ post.data.subject }</h1>
-            <article className="prose max-w-none">
+            <article className="prose max-w-none dark:text-white dark:prose-invert">
                 <Markdown>{ post.content }</Markdown>
             </article>
         </div>

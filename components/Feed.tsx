@@ -20,7 +20,7 @@ export default function Feed(props: {postMetadata: any}) {
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="w-full px-20 py-10 grid gap-2">{ postPreviews }</div>
-            <PaginationControl hasPrevPage={start > 0} hasNextPage={end < props.postMetadata.length} />
+            <PaginationControl hasPrevPage={start > 0} hasNextPage={end < props.postMetadata.length} total={props.postMetadata.length} />
         </div>
     );
 }

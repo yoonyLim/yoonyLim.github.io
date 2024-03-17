@@ -1,13 +1,10 @@
 import getPostMetadata from "@/utils/getPostMetadata";
-import PostPreview from "@/components/PostPreview";
+import Feed from "@/components/Feed";
 
 export default function HomePage() {
   const postMetadata = getPostMetadata("all");
-  const postPreviews = postMetadata.map((meatadata) => (
-    <PostPreview key={meatadata.slug} {...meatadata} />
-  ))
 
   return (
-    <div className="px-20 py-10 grid md:grid-cols-2 gap-4">{ postPreviews }</div>
+    <Feed postMetadata={postMetadata} />
   );
 }

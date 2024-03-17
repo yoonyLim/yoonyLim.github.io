@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Switch } from "@nextui-org/react";
-import { MoonIcon } from "./MoonIcon";
-import { SunIcon } from "./SunIcon";
+import { MoonIcon } from "./Icons/MoonIcon";
+import { SunIcon } from "./Icons/SunIcon";
 import { useTheme } from "next-themes";
 
 export default function DarkmodeSwitch() {
@@ -13,7 +13,7 @@ export default function DarkmodeSwitch() {
 
     useEffect(() => {
         setMounted(true);
-    });
+    }, []);
 
     useEffect(() => {
         isDark ? setTheme("dark") : setTheme("light");
@@ -22,16 +22,20 @@ export default function DarkmodeSwitch() {
     if(!mounted) return null;
 
     return (
-        <div>
+        <div className="flex justify-center">
             <Switch 
-            defaultSelected
-            isSelected={isDark}
-            onValueChange={setIsDark} 
-            color="default"
-            size="lg" 
-            startContent={<MoonIcon />}
-            endContent={<SunIcon />}
-            >Dark Mode: {isDark ? "on" : "off"}</Switch>
+                defaultSelected
+                isSelected={isDark}
+                onValueChange={setIsDark} 
+                color="default"
+                size="lg" 
+                startContent={<MoonIcon />}
+                endContent={<SunIcon />}
+            ></Switch>
+            <div className="flex flex-col items-center">
+                <span className="dark:text-gray-500 text-xs font-light">Dark Mode</span>
+                <span className="text-sm font-bold">{isDark ? "ON" : "OFF"}</span>
+            </div>
         </div>
     );
 }

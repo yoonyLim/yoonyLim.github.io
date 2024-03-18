@@ -23,9 +23,9 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50 text-black dark:bg-[#181818] dark:text-white`} >
           {/*Provider is used to suppress different rendering data between the server side and the client side when using Dark Mode*/}
           <Provider>
-            <div className="h-full min-h-screen">
+            <div>
               <Header />
-              <div className="min-h-dvh flex px-20 py-10">
+              <div className="flex px-20 py-10 min-h-dvh">
                 <Sidebar />
                 <div className="w-full">{ children }</div>
               </div>

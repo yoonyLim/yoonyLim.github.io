@@ -1,6 +1,7 @@
 import fs from 'fs';
 import Link from "next/link";
 import DarkmodeSwitch from "./DarkmodeSwitch";
+import MenuButton from './MenuButton';
 
 export default function Header() {
     const root = "mdposts/";
@@ -9,12 +10,14 @@ export default function Header() {
     const subLinks = [];
 
     for (let i = 0; i < subjects.length; i++) {
-        subLinks.push(
-            <Link 
-                href={`/posts/${subjects[i]}`} 
-                className='hover:text-gray-500 transition-colors duration-200 ease-in-out'
-            >{subjects[i].charAt(0).toUpperCase() + subjects[i].slice(1)}</Link>
-        )
+        if (subjects[i] != "projects")
+            subLinks.push(
+                <Link 
+                    key={i}
+                    href={`/posts/${subjects[i]}`} 
+                    className='hover:text-gray-500 transition-colors duration-200 ease-in-out'
+                >{subjects[i].charAt(0).toUpperCase() + subjects[i].slice(1)}</Link>
+            )
     }
 
     return (
@@ -25,19 +28,26 @@ export default function Header() {
                         href="/" 
                         className="font-black text-2xl hover:text-gray-500 transition-colors duration-200 ease-in-out"
                     >YOONY'S DEV</Link>
-                    <div className='hidden md:flex items-center'>
+                    <div className='hidden xl:flex items-center'>
                         <span className="mx-8 font-light text-2xl select-none">|</span>
                         <div className="flex items-center text-xl font-bold">
                             <Link 
                                 href="/about"
                                 className="hover:text-gray-500 transition-colors duration-200 ease-in-out"
                             >About</Link>
+                            <Link 
+                                href="/projects"
+                                className="ml-8 hover:text-gray-500 transition-colors duration-200 ease-in-out"
+                            >Projects</Link>
                             <span className="mx-8 text-2xl font-light select-none">|</span>
                             <div className='space-x-4'>{ subLinks }</div>
                         </div>
                     </div>
                 </div>
-                <DarkmodeSwitch />
+                <div className='hidden xl:flex'>
+                    <DarkmodeSwitch />
+                </div>
+                <MenuButton {...subLinks} />
             </div>
         </header>
     );

@@ -1,2 +1,2 @@
-export const postsPerPage: Number = 5;
+export const postsPerPage: Number = 8;
 export const buttonsPerPagination: Number = 3;

@@ -13,10 +13,10 @@ export default function PostPreview(props: PostMetadata) {
               <span className="ml-2 text-sm text-black dark:text-white">{ props.subject.toUpperCase() }</span>
             </div>
           </div>
-          <h2 className="font-bold text-2xl">{ props.title }</h2>
+          <h2 className="mt-2 font-bold text-2xl truncate">{ props.title }</h2>
           <div className="flex justify-between font-light">
-            <span>{ props.subtitle }</span>
-            <div className="flex items-center fill-black dark:fill-white">
+            <span className="truncate">{ props.subtitle }</span>
+            <div className="hidden sm:flex items-center fill-black dark:fill-white">
               <ClockIcon />
               <span className="ml-2 text-black dark:text-white">{ props.readingTime } min read</span>
             </div>

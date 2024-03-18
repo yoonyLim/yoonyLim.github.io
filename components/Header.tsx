@@ -11,7 +11,7 @@ export default function Header() {
     for (let i = 0; i < subjects.length; i++) {
         subLinks.push(
             <Link 
-                href={`/${subjects[i]}`} 
+                href={`/posts/${subjects[i]}`} 
                 className='hover:text-gray-500 transition-colors duration-200 ease-in-out'
             >{subjects[i].charAt(0).toUpperCase() + subjects[i].slice(1)}</Link>
         )
@@ -25,14 +25,16 @@ export default function Header() {
                         href="/" 
                         className="font-black text-2xl hover:text-gray-500 transition-colors duration-200 ease-in-out"
                     >YOONY'S DEV</Link>
-                    <span className="hidden md:inline mx-8 font-light text-2xl select-none">|</span>
-                    <div className="hidden md:flex items-center text-xl font-bold">
-                        <Link 
-                            href="/About"
-                            className="hover:text-gray-500 transition-colors duration-200 ease-in-out"
-                        >About</Link>
-                        <span className="mx-8 text-2xl font-light select-none">|</span>
-                        <div className='space-x-4'>{ subLinks }</div>
+                    <div className='hidden md:flex items-center'>
+                        <span className="mx-8 font-light text-2xl select-none">|</span>
+                        <div className="flex items-center text-xl font-bold">
+                            <Link 
+                                href="/about"
+                                className="hover:text-gray-500 transition-colors duration-200 ease-in-out"
+                            >About</Link>
+                            <span className="mx-8 text-2xl font-light select-none">|</span>
+                            <div className='space-x-4'>{ subLinks }</div>
+                        </div>
                     </div>
                 </div>
                 <DarkmodeSwitch />

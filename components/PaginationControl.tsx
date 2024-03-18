@@ -1,41 +1,87 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { postsPerPage, buttonsPerPagination } from "@/utils/paginationConstants";
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { ButtonGroup, Button } from "@nextui-org/react"
 import { ChevronIcon } from "./Icons/ChevronIcon";
 
-export default function PaginationControl(props: {hasPrevPage: boolean, hasNextPage: boolean, total: number}) {
+export default function PaginationControl(props: {start: Number, hasPrevPage: boolean, hasNextPage: boolean, total: number}) {
     const router = useRouter();
+    const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const POSTS_PER_PAGE = 8;
+    const POSTS_PER_PAGE = Number(postsPerPage);
+    const BUTTONS_PER_PAGINATION = Number(buttonsPerPagination);
+    const HALF_PAGINATION = Math.floor(BUTTONS_PER_PAGINATION / 2);
 
-    const page = searchParams.get("page") ?? "1";
+    const page = Number(searchParams.get("page") ?? "1");
 
     const numPages = Math.ceil(props.total / POSTS_PER_PAGE);
+
+    // check if the page is valid page number
+    if (page > numPages) {
+        router.push(`${pathname}/?page=1`);
+    }
     
     const pageButtons = [];
 
-    for (let i = 0; i < numPages; i++) {
+    // the page number buttons will only render current to number of (current + BUTTONS_PER_PAGINATION) buttons for the sake of width in smaller screens
+    if (page - HALF_PAGINATION > 1) {
         pageButtons.push(
             <Button
-                key={i}
-                isDisabled={Number(page) == i + 1}
-                onClick={() => {
-                    router.push(`/?page=${i + 1}`)
-                }}
+                key="0"
+                isDisabled={true}
                 className="font-black"
-            >{i + 1}</Button>
+            >...</Button>
+        )
+    }
+
+    for (let i = page; i <= numPages + HALF_PAGINATION; i++) {
+        if (i > HALF_PAGINATION && i < page + BUTTONS_PER_PAGINATION) {
+            pageButtons.push(
+                <Button
+                    key={i - HALF_PAGINATION}
+                    isDisabled={page == i - HALF_PAGINATION}
+                    onClick={() => {
+                        router.push(`${pathname}/?page=${i - HALF_PAGINATION}`)
+                    }}
+                    className="font-black"
+                >{i - HALF_PAGINATION}</Button>
+            )
+        }
+    }
+
+    if (page < numPages - HALF_PAGINATION && BUTTONS_PER_PAGINATION % 2 == 1) {
+        pageButtons.push(
+            <Button
+                key="-1"
+                isDisabled={true}
+                className="font-black"
+            >...</Button>
+        )
+    }
+
+    if (page <= numPages - HALF_PAGINATION && BUTTONS_PER_PAGINATION % 2 == 0) {
+        pageButtons.push(
+            <Button
+                key="-1"
+                isDisabled={true}
+                className="font-black"
+            >...</Button>
         )
     }
 
     return (
-        <div className="h-20">
-            <ButtonGroup>
+        <div className="h-10">
+            <ButtonGroup
+                radius="sm"
+                size="md"
+                isIconOnly={true}
+            >
                 <Button
                     isDisabled={!props.hasPrevPage}
                     onClick={() => {
-                        router.push("/?page=1");
+                        router.push(`${pathname}/?page=1`);
                     }}
                 >
                     <div className="fill-black dark:fill-white"><ChevronIcon /></div>
@@ -44,20 +90,20 @@ export default function PaginationControl(props: {hasPrevPage: boolean, hasNextP
                 <Button 
                     isDisabled={!props.hasPrevPage}
                     onClick={() => {
-                        router.push(`/?page=${Number(page) - 1}`);
+                        router.push(`${pathname}/?page=${Number(page) - 1}`);
                     }}
                 ><div className="fill-black dark:fill-white"><ChevronIcon /></div></Button>
                 { pageButtons }
                 <Button 
                     isDisabled={!props.hasNextPage}
                     onClick={() => {
-                        router.push(`/?page=${Number(page) + 1}`);
+                        router.push(`${pathname}/?page=${Number(page) + 1}`);
                     }}
                 ><div className="rotate-180 fill-black dark:fill-white"><ChevronIcon /></div></Button>
                 <Button
                     isDisabled={!props.hasNextPage}
                     onClick={() => {
-                        router.push(`/?page=${numPages}`);
+                        router.push(`${pathname}/?page=${numPages}`);
                     }}
                 >
                     <div className="rotate-180 fill-black dark:fill-white"><ChevronIcon /></div>

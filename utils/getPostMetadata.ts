@@ -23,6 +23,7 @@ const getPostMetadata = (subject: string) => {
       }
       
       return metadata;
+      
     } else {
       const root = "mdposts/" + subject + "/";
       const files = fs.readdirSync(root);

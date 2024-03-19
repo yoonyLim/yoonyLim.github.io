@@ -4,7 +4,7 @@ import getFrontmatter from "./getFrontmatter";
 
 const getPostMetadata = (subject: string) => {
     // metadata to return
-    let metadata: PostMetadata[] = [];
+    const metadata: PostMetadata[] = [];
   
     // get all posts of all subjects or a certain subject in "mdposts" folder
     if (subject == "all") {
@@ -23,7 +23,6 @@ const getPostMetadata = (subject: string) => {
       }
       
       return metadata;
-      
     } else {
       const root = "mdposts/" + subject + "/";
 

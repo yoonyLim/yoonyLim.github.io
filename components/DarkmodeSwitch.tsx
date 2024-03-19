@@ -32,7 +32,7 @@ export default function DarkmodeSwitch() {
                 startContent={<MoonIcon />}
                 endContent={<SunIcon />}
             ></Switch>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center select-none">
                 <span className="dark:text-gray-500 text-xs font-light">Dark Mode</span>
                 <span className="text-sm font-bold">{isDark ? "ON" : "OFF"}</span>
             </div>

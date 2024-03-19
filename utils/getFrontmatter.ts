@@ -12,7 +12,7 @@ const getFrontmatter = (subject: string, slug: string) => {
     title: frontmatter.data.title,
     subtitle: frontmatter.data.subtitle,
     date: frontmatter.data.date,
-    readingTime: Math.ceil(getPostContent(subject, slug).length / LETTERS_PER_MIN)
+    readingTime: Math.ceil(getPostContent(subject, slug)!.length / LETTERS_PER_MIN)
   }
 }
 

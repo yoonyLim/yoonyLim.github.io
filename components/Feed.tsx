@@ -23,7 +23,7 @@ export default function Feed(props: {postMetadata: any}) {
 
         return (
             <div className="flex flex-col justify-center items-center md:pl-10 z-0">
-                <div className="w-full flex justify-start mb-4">
+                <div className="w-full flex justify-start mb-4 select-none">
                     <h2 className="font-light text-xl">{subject} 최신 글</h2>
                 </div>
                 <div className="w-full mb-10 grid gap-2">{ postPreviews }</div>

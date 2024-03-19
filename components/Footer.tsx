@@ -27,7 +27,7 @@ export default function Header() {
                             <span className="ml-2">Yoony's YouTube</span>
                         </Link>
                     </div>
-                    <div className="mt-2 font-bold">© 2024 Hayoon Lim</div>
+                    <div className="mt-2 font-bold select-none">© 2024 Hayoon Lim</div>
                 </div>
             </div>
         </footer>

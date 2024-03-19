@@ -18,7 +18,7 @@ export default function PostPage(props: any) {
             headingNavs.push(
                 <a 
                     href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}
-                    className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 transition-colors duration-200 ease-in-out"
+                    className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 hover:scale-110 transition duration-200 ease-in-out"
                 >{ post.content.match(rgx)![i] }</a>
             )
         }
@@ -85,8 +85,9 @@ export default function PostPage(props: any) {
 // return slug in order to make the website static by statically loading all the posts, not dynamically
 export const generateStaticParams = async () => {
     const posts = getPostMetadata("all");
+
     return posts!.map((post) => ({
         subject: post.subject,
-        slug: post.slug
+        slug: encodeURI(post.slug)
     }));
 }

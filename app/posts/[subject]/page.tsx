@@ -1,12 +1,15 @@
 import getPostMetadata from "@/utils/getPostMetadata";
 import Feed from "@/components/Feed";
 import getSubjectMetadata from "@/utils/getSubjectMetadata";
+import { Suspense } from "react";
 
 export default function SubjectFeedPage(props: any) {
     const postMetadata = getPostMetadata(props.params.subject);
 
     return (
-        <Feed postMetadata={postMetadata} />
+        <Suspense>
+            <Feed postMetadata={postMetadata} />
+        </Suspense>
     );
 }
 

@@ -7,9 +7,9 @@ import YouTubeLogo from "./Icons/YouTubeLogo";
 export default function Header() {
     return (
         <footer className="static bottom-0 w-full bg-white dark:bg-[#181818]">
-            <div className="w-full h-40 px-20 flex items-center shadow-[0_-2px_5px_-1px_rgba(0,0,0,0.16)] dark:shadow-[0_-2px_5px_-1px_rgba(0,0,0,1.0)]">
-                <div className="flex flex-col space-y-4 font-bold">
-                    <div className="flex space-x-8">
+            <div className="w-full h-48 xl:h-40 px-10 xl:px-20 flex items-center shadow-[0_-2px_5px_-1px_rgba(0,0,0,0.16)] dark:shadow-[0_-2px_5px_-1px_rgba(0,0,0,1.0)]">
+                <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col xl:flex-row space-y-2 xl:space-y-0 xl:space-x-8">
                         <Link 
                             href="https://github.com/yoonyLim" 
                             target="_blank" 
@@ -27,7 +27,7 @@ export default function Header() {
                             <span className="ml-2">Yoony's YouTube</span>
                         </Link>
                     </div>
-                    <div className="mt-2">© 2024 Hayoon Lim</div>
+                    <div className="mt-2 font-bold">© 2024 Hayoon Lim</div>
                 </div>
             </div>
         </footer>

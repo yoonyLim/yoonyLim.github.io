@@ -21,8 +21,8 @@ export default function Header() {
     }
 
     return (
-        <header className="sticky top-0 w-full bg-white dark:bg-[#181818]">
-            <div className="h-20 px-20 flex items-center justify-between shadow-[0_2px_5px_-1px_rgba(0,0,0,0.16)] dark:shadow-[0_2px_5px_-1px_rgba(0,0,0,1.0)]">
+        <header className="sticky top-0 z-50 w-full bg-white dark:bg-[#181818]">
+            <div className="h-20 px-10 xl:px-20 flex items-center justify-between shadow-[0_2px_5px_-1px_rgba(0,0,0,0.16)] dark:shadow-[0_2px_5px_-1px_rgba(0,0,0,1.0)]">
                 <div className="flex items-center">
                     <Link 
                         href="/" 
@@ -44,10 +44,12 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-                <div className='hidden xl:flex'>
-                    <DarkmodeSwitch />
+                <div>
+                    <div className='hidden xl:flex'>
+                        <DarkmodeSwitch />
+                    </div>
+                    <MenuButton {...subjects} />
                 </div>
-                <MenuButton {...subLinks} />
             </div>
         </header>
     );

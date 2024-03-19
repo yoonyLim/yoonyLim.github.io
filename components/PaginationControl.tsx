@@ -72,7 +72,7 @@ export default function PaginationControl(props: {start: Number, hasPrevPage: bo
     }
 
     return (
-        <div className="h-10">
+        <div className="h-10 z-0">
             <ButtonGroup
                 radius="sm"
                 size="md"

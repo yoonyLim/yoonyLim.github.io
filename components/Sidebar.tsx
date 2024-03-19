@@ -26,11 +26,11 @@ export default function Sidebar() {
     }
 
     return (
-        <div className="shrink-0 hidden xl:flex flex-col max-w-80">
+        <div className="shrink-0 hidden xl:flex flex-col max-w-72">
             <span className="font-bold text-2xl">Hayoon Lim / 임하윤</span>
             <span className="font-light">경희대학교 소프트웨어융합학과 21학번</span>
             <div className="mt-8 flex flex-col text-gray-500">
-                <span>총 { subjects.length - 1 }개의 블로그 주제</span>
+                <span>총 { subjects.length }개의 블로그 주제</span>
                 <div className="flex flex-wrap">
                     { subjectTags }
                 </div>

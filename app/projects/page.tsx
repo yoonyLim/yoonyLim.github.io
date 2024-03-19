@@ -25,8 +25,8 @@ export default function ProjectsPage() {
     }
 
     return (
-        <Suspense>
-            <div className="flex flex-col justify-center items-center md:pl-10">
+        <div className="flex flex-col justify-center items-center md:pl-10">
+            <Suspense>
                 <div className="w-full flex justify-start mb-4">
                     <h2 className="font-light text-xl">최신 프로젝트</h2>
                 </div>
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
                 ) : (
                     <PaginationControl start={start} hasPrevPage={start > 0} hasNextPage={end < projects.length} total={projects.length} />
                 )}
-            </div>
-        </Suspense>
+            </Suspense>
+        </div>
     )
 }

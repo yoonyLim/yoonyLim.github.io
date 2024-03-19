@@ -6,8 +6,6 @@ import { useSearchParams } from "next/navigation";
 import PaginationControl from "@/components/PaginationControl";
 
 export default function ProjectsFeed(props: {projectsList: any}) {
-    console.log(props.projectsList)
-
     const searchParams = useSearchParams();
 
     const page = Number(searchParams.get("page") ?? "1");

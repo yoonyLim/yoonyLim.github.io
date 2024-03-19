@@ -26,17 +26,17 @@ export default function ProjectsPage() {
 
     return (
         <div className="flex flex-col justify-center items-center md:pl-10">
-            <Suspense>
                 <div className="w-full flex justify-start mb-4">
                     <h2 className="font-light text-xl">최신 프로젝트</h2>
                 </div>
-                <div className="w-full mb-10 grid gap-2">{ projects }</div>
+                <Suspense>
+                    <div className="w-full mb-10 grid gap-2">{ projects }</div>
+                </Suspense>
                 { projectsList.projects.length == 0 ? (
                 <div className="font-bold text-2xl text-gray-500 select-none">아직 작성된 글이 없습니다!</div>
                 ) : (
                     <PaginationControl start={start} hasPrevPage={start > 0} hasNextPage={end < projects.length} total={projects.length} />
                 )}
-            </Suspense>
         </div>
     )
 }

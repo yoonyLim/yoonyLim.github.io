@@ -4,13 +4,15 @@
             "name": "LeverageHub",
             "url": "https://www.leveragehub.co.kr/#/",
             "year": "2020",
-            "description": "주식 정보 공유 웹 커뮤니티"
+            "description": "주식 정보 공유 웹 커뮤니티",
+            "techStacks": ["Vue 2", "AWS"]
         },
         {
             "name": "KHU-Map",
             "url": "https://yoonylim.github.io/project-khu-map/#/",
             "year": "2023",
-            "description": "경희대학교 국제캠퍼스 3D Interactive 지도"
+            "description": "경희대학교 국제캠퍼스 3D Interactive 지도",
+            "techStacks": ["Vue 3", "Three.js"]
         }
     ]
 }

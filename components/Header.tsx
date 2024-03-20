@@ -14,7 +14,7 @@ export default function Header() {
             <Link 
                 key={i}
                 href={`/posts/${subjects[i]}`} 
-                className='hover:text-gray-500 hover:scale-x-110 transition duration-200 ease-in-out'
+                className='ml-8 hover:text-gray-500 hover:scale-110 transition duration-200 ease-in-out'
             >{subjects[i].charAt(0).toUpperCase() + subjects[i].slice(1)}</Link>
         )
     }
@@ -32,14 +32,14 @@ export default function Header() {
                         <div className="flex items-center text-xl font-bold">
                             <Link 
                                 href="/about"
-                                className="hover:text-gray-500 hover:scale-x-110 transition duration-200 ease-in-out"
+                                className="hover:text-gray-500 hover:scale-110 transition duration-200 ease-in-out"
                             >About</Link>
                             <Link 
                                 href="/projects"
-                                className="ml-8 hover:text-gray-500 hover:scale-x-110 transition duration-200 ease-in-out"
+                                className="ml-8 hover:text-gray-500 hover:scale-110 transition duration-200 ease-in-out"
                             >Projects</Link>
-                            <span className="mx-8 text-2xl font-light select-none">|</span>
-                            <div className='space-x-4'>{ subLinks }</div>
+                            <span className="ml-8 text-2xl font-light select-none">|</span>
+                            { subLinks }
                         </div>
                     </div>
                 </div>

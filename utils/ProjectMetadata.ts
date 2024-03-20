@@ -3,4 +3,5 @@ export interface ProjectMetadata {
     url: string;
     year: string;
     description: string;
+    techStacks: string[];
 }

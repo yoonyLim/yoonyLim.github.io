@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import getPostMetadata from "@/utils/getPostMetadata";
 import { Suspense } from "react";
 import NoSSR from "@/components/NoSSR";
+import { MathJax } from "./mathjax";
 
 export default function PostPage(props: any) {
     const subject = props.params.subject;
@@ -32,7 +33,7 @@ export default function PostPage(props: any) {
             <Suspense>
                 <div className="w-full xl:pl-20">
                     <NoSSR>
-                        {/* <MathJax/> */}
+                        <MathJax/>
                         {
                             post.content.match(rgx) != null ? (
                                 <div className="hidden xl:flex fixed left-20 top-52 max-w-72 max-h-[50%] overflow-y-scroll rounded p-4 bg-gray-300 dark:bg-[#24292f] shadow-[2px_2px_10px_2px_rgba(0,0,0,0.16)] dark:shadow-[2px_2px_10px_2px_rgba(0,0,0,1.0)]">
@@ -47,8 +48,6 @@ export default function PostPage(props: any) {
                         <h1 className="my-4">작성일: { post.data.date }</h1>
                         <h1>{ post.data.subject }</h1>
                         <article className="prose max-w-none dark:text-white dark:prose-invert">
-                            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
                             <Markdown options={{
                                     slugify: str => str,
                                     overrides: {

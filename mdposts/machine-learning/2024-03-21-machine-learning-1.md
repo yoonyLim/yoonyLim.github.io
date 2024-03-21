@@ -31,13 +31,7 @@ $$\begin{eqnarray}
  \right)
 \end{eqnarray}$$
 
-$\begin{bmatrix}a & b \\\\ c & d\end{bmatrix}$
-
-$$\begin{eqnarray} 
-y &=& x^4 + 4      \nonumber \\
-&=& (x^2+2)^2 -4x^2 \nonumber \\
-&\le&(x^2+2)^2    \nonumber
-\end{eqnarray}$$
+$$\begin{bmatrix}a & b \\\\ c & d\end{bmatrix}$$
 
 $$
 \left(

@@ -3,7 +3,6 @@ import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
 import getPostMetadata from "@/utils/getPostMetadata";
 import { Suspense } from "react";
-import { MathJax } from "./mathjax";
 import NoSSR from "@/components/NoSSR";
 
 export default function PostPage(props: any) {
@@ -33,7 +32,7 @@ export default function PostPage(props: any) {
             <Suspense>
                 <div className="w-full xl:pl-20">
                     <NoSSR>
-                        <MathJax/>
+                        {/* <MathJax/> */}
                         {
                             post.content.match(rgx) != null ? (
                                 <div className="hidden xl:flex fixed left-20 top-52 max-w-72 max-h-[50%] overflow-y-scroll rounded p-4 bg-gray-300 dark:bg-[#24292f] shadow-[2px_2px_10px_2px_rgba(0,0,0,0.16)] dark:shadow-[2px_2px_10px_2px_rgba(0,0,0,1.0)]">

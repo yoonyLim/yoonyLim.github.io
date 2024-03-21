@@ -21,6 +21,11 @@ const getPostMetadata = (subject: string) => {
             metadata.push({"subject": subject, "slug": slug, "title": frontmatter.title, "subtitle": frontmatter.subtitle, "date": frontmatter.date, "readingTime": frontmatter.readingTime});
         }
       }
+
+      // sort desc order
+      metadata.sort((a: PostMetadata, b: PostMetadata) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      })
       
       return metadata;
     } else {
@@ -36,6 +41,11 @@ const getPostMetadata = (subject: string) => {
           const frontmatter = getFrontmatter(subject, slug);
           metadata.push({"subject": subject, "slug": slug, "title": frontmatter.title, "subtitle": frontmatter.subtitle, "date": frontmatter.date,  "readingTime": frontmatter.readingTime});
         }
+
+        // sort desc order
+        metadata.sort((a: PostMetadata, b: PostMetadata) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
     
         return metadata;
       } else {

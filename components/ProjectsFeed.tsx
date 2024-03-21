@@ -14,6 +14,11 @@ export default function ProjectsFeed(props: {projectsList: any}) {
     const start = (page - 1) * POSTS_PER_PAGE;
     const end = start + POSTS_PER_PAGE;
 
+    // sort desc order
+    props.projectsList.projects.sort((a: any, b: any) => {
+        return Number(b.year) - Number(a.year);
+    })
+
     const projects = [];
 
     for (var i = 0; i < props.projectsList.projects.length; i++) {

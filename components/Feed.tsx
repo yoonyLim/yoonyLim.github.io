@@ -5,7 +5,7 @@ import { postsPerPage } from "@/utils/paginationConstants";
 import PostPreview from "@/components/PostPreview";
 import PaginationControl from "./PaginationControl";
 
-export default function Feed(props: {postMetadata: any}) {
+export default function Feed(props: {postMetadata: any }) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const subject = pathname.split('/')[pathname.split('/').length - 1].toUpperCase();
@@ -16,15 +16,15 @@ export default function Feed(props: {postMetadata: any}) {
     const start = (page - 1) * POSTS_PER_PAGE;
     const end = start + POSTS_PER_PAGE;
 
-    if (props.postMetadata) {
+    if (props.postMetadata) {        
         const postPreviews = props.postMetadata.map((meatadata: any) => (
             <PostPreview key={meatadata.slug} {...meatadata} />
         )).slice(start, end);
 
         return (
             <div className="flex flex-col justify-center items-center md:pl-10 z-0">
-                <div className="w-full flex justify-start mb-4 select-none">
-                    <h2 className="font-light text-xl">{subject} 최신 글</h2>
+                <div className="w-full flex justify-between items-center mb-4 select-none">
+                    <h2 className="mr-4 font-light text-xl">{subject} 최신 글</h2>
                 </div>
                 <div className="w-full mb-10 grid gap-2">{ postPreviews }</div>
                 { props.postMetadata.length == 0 ? (

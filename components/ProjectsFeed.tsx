@@ -24,7 +24,8 @@ export default function ProjectsFeed(props: {projectsList: any}) {
     for (var i = 0; i < props.projectsList.projects.length; i++) {
         projects.push(
             <ProjectPreview 
-                key={i} name={props.projectsList.projects[i].name} 
+                key={i}
+                name={props.projectsList.projects[i].name} 
                 url={props.projectsList.projects[i].url} 
                 year={props.projectsList.projects[i].year} 
                 description={props.projectsList.projects[i].description}  

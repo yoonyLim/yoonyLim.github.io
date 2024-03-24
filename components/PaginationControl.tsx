@@ -51,6 +51,7 @@ export default function PaginationControl(props: {start: Number, hasPrevPage: bo
         }
     }
 
+    // when odd number of displayed buttons
     if (page < numPages - HALF_PAGINATION && BUTTONS_PER_PAGINATION % 2 == 1) {
         pageButtons.push(
             <Button
@@ -61,6 +62,7 @@ export default function PaginationControl(props: {start: Number, hasPrevPage: bo
         )
     }
 
+    // when even number of displayed buttons
     if (page <= numPages - HALF_PAGINATION && BUTTONS_PER_PAGINATION % 2 == 0) {
         pageButtons.push(
             <Button

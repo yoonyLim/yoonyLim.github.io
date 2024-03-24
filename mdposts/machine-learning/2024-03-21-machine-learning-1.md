@@ -2,6 +2,7 @@
 title: "Machine Learning 정리 노트 1"
 subtitle: "Vectors and Matrices"
 date: "2024-03-21"
+use-math: true
 ---
 
 # [Machine Learning 정리 노트] Vectors and Matrices
@@ -14,13 +15,12 @@ date: "2024-03-21"
 
 ### 2.1 Vectors and Matrices
 
+기계 학습에 대해 시작하려면 먼저 
+
 $$\begin{pmatrix} v_1 \\\\ \vdots \\\\ v_n \end{pmatrix} \$$
 
-$$( a_1, a_2, \ldots, a_n )$$
-
 $$\begin{eqnarray}
-\boldsymbol{ 1 }
-=( \underbrace{ 1, 1, \ldots, 1 }_{ n } )^{ \mathrm{ T } }
+1=( \underbrace{ 1, 1, \ldots, 1 }_{ n } )^{ \mathrm{ T } }
 =\left(
    \begin{array}{c}
      1 \\\\
@@ -32,15 +32,6 @@ $$\begin{eqnarray}
 \end{eqnarray}$$
 
 $$\begin{bmatrix}a & b \\\\ c & d\end{bmatrix}$$
-
-$$
-\left(
-\matrix{
-\text{here is a long formula} \\\\
-\text{and} \\\\
-\text{here is another long formula}}
-\right)
-$$
 
 ### 2.2 Least Squares and Geometry
 

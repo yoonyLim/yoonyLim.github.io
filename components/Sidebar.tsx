@@ -17,6 +17,7 @@ export default function Sidebar() {
             subjectTags.push(
                 <Link 
                     href={`/posts/${subject}`}
+                    key={subject}
                     className="flex items-center mt-2 mr-2 py-1 px-4 rounded-full bg-gray-300 dark:bg-gray-500 hover:bg-gray-500 hover:dark:bg-gray-700 hover:scale-110 transition duration-200 ease-in-out"
                 >
                     <span className="text-sm text-black dark:text-white">{ subject.toUpperCase() }</span>

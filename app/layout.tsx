@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${spoqa.className} bg-gray-50 text-black dark:bg-[#181818] dark:text-white`} >
           {/*Provider is used to suppress different rendering data between the server side and the client side when using Dark Mode*/}
           <Provider>
@@ -51,7 +51,7 @@ export default function RootLayout({
               <Header />
               <div className="flex px-10 xl:px-20 py-10 min-h-dvh">
                 <Sidebar />
-                <main className="w-full">
+                <main className="w-full" suppressHydrationWarning>
                   { children }
                 </main>
               </div>

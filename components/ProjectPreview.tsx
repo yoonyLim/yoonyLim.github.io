@@ -6,7 +6,10 @@ export default function ProjectPreview(props: ProjectMetadata) {
 
     for (var i = 0; i < props.techStacks.length; i++) {
         techStacks.push(
-            <div className="flex justify-center items-center pr-2 rounded-full bg-gray-300 dark:bg-gray-500">
+            <div
+                key={i} 
+                className="flex justify-center items-center pr-2 rounded-full bg-gray-300 dark:bg-gray-500"
+            >
                 <span className="ml-2 text-sm text-black dark:text-white">{ props.techStacks[i] }</span>
             </div>
         );

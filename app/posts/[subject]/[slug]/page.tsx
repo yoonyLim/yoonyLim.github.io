@@ -22,7 +22,7 @@ export default function PostPage(props: any) {
                     <a 
                         href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}
                         className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 hover:translate-x-1.5 transition duration-200 ease-in-out"
-                    >{ post.content.match(rgx)![i].replaceAll('#', '') }</a>
+                    >{ post.content.match(rgx)![i].replaceAll('#', "") }</a>
                 )
             }
         }
@@ -34,6 +34,8 @@ export default function PostPage(props: any) {
                         post.content.match(rgx) != null ? (
                             <div className="hidden xl:flex fixed left-20 top-52 max-w-72 max-h-[50%] overflow-y-scroll rounded p-4 bg-gray-300 dark:bg-[#24292f] shadow-[2px_2px_10px_2px_rgba(0,0,0,0.16)] dark:shadow-[2px_2px_10px_2px_rgba(0,0,0,1.0)]">
                                 <div className="w-fit flex flex-col">
+                                    <span className="text-xl font-bold select-none">목차</span>
+                                    <hr className="my-2"></hr>
                                     { headingNavs }
                                 </div>
                             </div>

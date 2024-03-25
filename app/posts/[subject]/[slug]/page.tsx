@@ -32,7 +32,7 @@ export default function PostPage(props: any) {
                 <div className="w-full xl:pl-20">
                     {
                         post.content.match(rgx) != null ? (
-                            <div className="hidden xl:flex fixed left-20 top-52 max-w-72 max-h-[50%] overflow-y-scroll rounded p-4 bg-gray-300 dark:bg-[#24292f] shadow-[2px_2px_10px_2px_rgba(0,0,0,0.16)] dark:shadow-[2px_2px_10px_2px_rgba(0,0,0,1.0)]">
+                            <div className="hidden xl:flex fixed left-20 top-52 max-w-72 max-h-[50%] overflow-y-scroll rounded p-4 bg-gray-100 dark:bg-[#24292f] shadow-[2px_2px_10px_2px_rgba(0,0,0,0.16)] dark:shadow-[2px_2px_10px_2px_rgba(0,0,0,1.0)]">
                                 <div className="w-fit flex flex-col">
                                     <span className="text-xl font-bold select-none">목차</span>
                                     <hr className="my-2"></hr>

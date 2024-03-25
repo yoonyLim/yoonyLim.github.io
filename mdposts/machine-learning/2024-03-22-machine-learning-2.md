@@ -26,16 +26,16 @@ use-math: true
 
 [저번 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-21-machine-learning-1)를 통해 우리는 예측되는 레이블 벡터는 $\underline{\hat{y}} = X \underline{w}$로 표현된다는 것을 알고 있다. 그렇다면 가중치 벡터 $\underline{w}$는 어떻게 결정할 수 있을까?
 
-해당 질문에 대한 답으로 최소 제곱법 혹 최소 자승법으로 불리는 방법을 사용한다. 잔차는 $r_i = y_i - \hat{y}_i$로 표현되고 이 중 잔차와 예측하는 레이블 벡터는 가중치 벡터 $\underline{w}$에 의존적이므로 $r_i(\underline{w}) = y_i - \hat{y}_i(\underline{w})$로도 표현한다. 즉, 가중치 벡터 $\underline{w}$의 각 가중치들을 조절하여 실제 레이블 값과 예측 레이블 값의 차이를 줄여 가장 작은 잔차를 이룰 수 있다.
+해당 질문에 대한 답으로 최소 제곱법 혹 최소 자승법으로 불리는 방법을 사용한다. 잔차는 $r_i = y_i - \hat{y}_i$으로 표현되고 이 중 잔차와 예측하는 레이블은 가중치 벡터 $\underline{w}$에 의존적이므로 $r_i(\underline{w}) = y_i - \hat{y}_i(\underline{w})$로도 표현한다. 즉, 가중치 벡터 $\underline{w}$의 각 가중치들을 조절하여 실제 레이블 값과 예측 레이블 값의 차이를 줄여 가장 작은 잔차를 이룰 수 있다.
 
-이를 기하학적으로 표현하자면 잔차 벡터는 각 잔차들로 구성된 벡터로 $\underline{r} = \begin{bmatrix} r_1 \\\\ r_2 \\\\ \vdots \\\\ r_n \end{bmatrix}$로 표현되고, 이는 실제 레이블 벡터 $\underline{y}$와 예측 레이블 벡터 $\underline{\hat{y}}$의 차이인 벡터로 두 벡터 사이의 거리를 나타낸다. [이전 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-21-machine-learning-1)에서 다룬 거리를 나타내는 $L^2$ norm의 제곱을 사용하여 표현하면 $ \lVert r(\underline{w}) \rVert ^2 = \lVert \underline{y} - \underline{\hat{y}} \rVert ^2 =
+이를 기하학적으로 표현하자면 잔차 벡터는 각 잔차들로 구성된 벡터로 $\underline{r} = \begin{bmatrix} r_1 \\\\ r_2 \\\\ \vdots \\\\ r_n \end{bmatrix}$로 표현되고, 이는 실제 레이블 벡터 $\underline{y}$와 예측 레이블 벡터 $\underline{\hat{y}}$의 차이인 벡터로 두 벡터 사이의 거리를 나타낸다. [이전 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-21-machine-learning-1)에서 다룬 거리를 나타내는 $L^2$ norm의 제곱을 사용하여 표현하면 $ \lVert \underline{r}(\underline{w}) \rVert ^2 = \lVert \underline{y} - \underline{\hat{y}} \rVert ^2 =
 \sum_{i=1}^n ( y_i - \langle \underline{w}, \underline{x_i} \rangle ) ^2$으로 표현할 수 있다. 이는 $n$차원에서의 피타고라스 정리의 확장된 적용이다.
 
 ***가정: 최소 제곱법의 이론 이해를 위해 특성 행렬 $X$의 모든 특성 벡터들이 서로 선형 독립이라고 가정한다.***
 
 그렇다면 $\underline{\hat{y}} = X \underline{w} = w_1 \underline{x_1} + w_2 \underline{x_2} + \dots + w_p \underline{x_p}$이고 이는 $\underline{\hat{y}}$이 행렬 $X$의 열벡터들로 이루어지는 벡터 공간에 속한다는 것을 의미한다. $\underline{\hat{y}}$이 $\underline{x_1}$, $\underline{x_2}$, $\dots$, $\underline{x_p}$로 표현 가능하므로 $\underline{\hat{y}} \in \text{span}(\text{cols}(X))$이다.
 
-***실제 레이블 벡터 $\underline{\hat{y}}$는 $\text{span}(\text{cols}(X))$ 위에 있을 수도, 공간 외부에 있을 수도 있다.***
+***실제 레이블 벡터 $\underline{y}$는 $\text{span}(\text{cols}(X))$ 위에 있을 수도, 공간 외부에 있을 수도 있다.***
 
 간단한 예시를 통해 기하학적 이해를 이끌어내 보자. 행렬 $X$가 2개의 특성 벡터를 지닌다 가정하면 아래 그림과 같이 실제 레이블 벡터 $\underline{y}$, 최적의 예측 레이블 벡터 $\underline{\hat{y}}$, 가장 작은 잔차 벡터 $\underline{r}$, 벡터 공간 $\text{span}(\text{cols}(X))$과의 관계를 나타낼 수 있다. 이때 가장 작은 잔차 벡터라 하면 실제 레이블 벡터와 벡터 공간 간의 거리가 가장 작을 때의 예측 레이블 벡터를 의미하기에 $\underline{r}$은 벡터 공간에 수직일 수밖에 없다.
 

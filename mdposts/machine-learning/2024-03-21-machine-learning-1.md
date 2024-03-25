@@ -17,9 +17,9 @@ use-math: true
 
 - 기계 학습: 실험 및 관측을 통해 얻은 데이터로 컴퓨터가 패턴을 식별하도록 하는 학습
 - 초반에 배우는 기계 학습: 회귀 및 분류에 쓰이는 선형 모델을 생성
-- 선형 모델: 데이터셋이 주어질 때, 데이터 레이블(label)의 예측값 벡터를 특성 행렬과 가중치 벡터의 결합으로 표현하는 모델
-- 레이블(label): 특성과 가중치를 통해 예측하는 값
-- 특성(feature): 데이터셋에서 추출하여 수치화할 수 있는 데이터의 특성
+- 선형 모델: 데이터셋이 주어질 때, 데이터 레이블(label)의 예측값 벡터를 특성 행렬과 가중치 벡터의 선형 결합으로 표현하는 모델
+- 레이블(label): 데이터셋에서 주어진, 혹은 특성과 가중치를 통해 예측하는 값
+- 특성(feature): 데이터셋에서 추출하여 수치화할 수 있는 데이터의 특성 값
 - 가중치(weight): 각 특성의 계수로 활동하여 특성마다 중요도를 부여하는 값
 
 정말 간단하게 예시를 통해 용어를 정리하고자 한다. 아래와 같은 데이터셋이 주어졌을 때, 특성은 "몸 길이"와 "체중"이고 예측하고자 하는 레이블은 "38개월 뒤 생존 여부"로 말할 수 있다.
@@ -44,16 +44,16 @@ x_{i2} $$
 2. 벡터와 행렬의 특성들을 사용하여 식의 유도가 용이하기 때문
 3. 시각적, 공간적 개념 표현이 가능하기 때문
 
-그렇다면 해당 수업에서 일반적으로 각 요소를 어떻게 표현하는지 살펴본다. (편의상 특성 벡터나 가중치 벡터 표기 시 $\underline{w}$으로 표현한다.)
+그렇다면 해당 수업에서 일반적으로 각 요소를 어떻게 표현하는지 살펴본다. (편의상 벡터 표기 시 $\underline{w}$으로 표현한다.)
 
-- 데이터셋에서 주어지는 레이블(label) 값: $y$
-- 예측한 레이블(label) 값: $\hat{y}$
-- 샘플의 개수: $n$
-- 특성의 개수: $p$
-- $i$번째 샘플의 특성(feature) 벡터: $\underline{x_i}$
-- 가중치(weight) 벡터: $\underline{w}$
-- $i$번째 샘플의 $j$번째 특성 값: $x_{ij}$
-- $j$번째 특성에 대한 가중치 값: $w_j$
+- $y$: 데이터셋에서 주어지는 레이블(label) 값
+- $\hat{y}$: 예측한 레이블(label) 값
+- $n$: 샘플의 개수
+- $p$: 특성의 개수 
+- $\underline{x_i}$: $i$번째 샘플의 특성(feature) 벡터
+- $\underline{w}$: 가중치(weight) 벡터
+- $x_{ij}$: $i$번째 샘플의 $j$번째 특성 값
+- $w_j$: $j$번째 특성에 대한 가중치 값
 
 ### 2.3 선형 모델에 대한 수학적 이해
 
@@ -67,9 +67,9 @@ x_{i2} $$
 
 ***참고: 본 수업에서는 특성 벡터와 가중치 벡터를 열벡터(column vector)로 사용한다. (대부분의 기계 학습 수업에서도 특성 벡터와 가중치 벡터를 열벡터로 취급하지만 일부 행벡터를 사용하는 곳도 있으므로 주의해야 한다.)***
 
-내적을 구하기 위해서 전치의 의미를 알아둘 필요가 있다. 전치란 간단히 말하면 행과 열을 맞바꾸는 것을 말한다. 즉, 열벡터는 전치하면 행벡터가 된다. 이를 통해 내적을 계산하면 두 벡터 $\underline{u} = \begin{bmatrix} u_1 \\\\ u_2 \end{bmatrix}$와 $\underline{v} = \begin{bmatrix} v_1 \\\\ v_2 \end{bmatrix}$의 내적 $\langle \underline{u}, \underline{v} \rangle$는 $$\langle \underline{u}, \underline{v} \rangle = \underline{u}^T \underline{v} = \begin{bmatrix} u_1 & u_2 \end{bmatrix} \begin{bmatrix} v_1 \\\\ v_2 \end{bmatrix} = \underline{u} \underline{v}^T = \begin{bmatrix} u_1 \\\\ u_2 \end{bmatrix} \begin{bmatrix} v_1 & v_2 \end{bmatrix} = u_1 v_1 + u_2 v_2$$ 이다.
+내적을 구하기 위해서 전치의 의미를 알아둘 필요가 있다. 전치란 간단히 말하면 행과 열을 맞바꾸는 것을 말한다. 즉, 열벡터는 전치하면 행벡터가 된다. 이를 통해 내적을 계산하면 두 벡터 $\underline{u} = \begin{bmatrix} u_1 \\\\ u_2 \end{bmatrix}$와 $\underline{v} = \begin{bmatrix} v_1 \\\\ v_2 \end{bmatrix}$의 내적 $\langle \underline{u}, \underline{v} \rangle$는 $$\langle \underline{u}, \underline{v} \rangle = \underline{u}^T \underline{v} = \begin{bmatrix} u_1 & u_2 \end{bmatrix} \begin{bmatrix} v_1 \\\\ v_2 \end{bmatrix} = \underline{v}^T \underline{u} = \begin{bmatrix} v_1 & v_2 \end{bmatrix} \begin{bmatrix} u_1 \\\\ u_2 \end{bmatrix} = u_1 v_1 + u_2 v_2$$ 이다.
 
-즉, 위의 내용을 종합하여 $i$번째 샘플의 특성 벡터 $\underline{x_i}$와 가중치 벡터 $\underline{w}$의 내적으로 에측 레이블값 $\hat{y}_i$을 계산한다면 아래와 같다:
+즉, 위의 내용을 종합하여 $i$번째 샘플의 특성 벡터 $\underline{x_i}$와 가중치 벡터 $\underline{w}$의 내적으로 예측 레이블값 $\hat{y}_i$을 계산한다면 아래와 같다:
 
 $$
 \underline{x_i} =
@@ -85,7 +85,7 @@ $$
 
 일 때,
 
-$$ \hat{y}_i = \langle \underline{w}, \underline{x_i} \rangle = \underline{w}^T \underline{x_i} = \underline{w} \underline{{x_i}}^T = w_1
+$$ \hat{y}_i = \langle \underline{w}, \underline{x_i} \rangle = \underline{w}^T \underline{x_i} = \underline{{x_i}}^T \underline{w} = w_1
 x_{i1} + w_2
 x_{i2} + \dots + w_p
 x_{ip}$$
@@ -94,11 +94,11 @@ x_{ip}$$
 
 그래프 상에서 2개의 특성을 가지는 특성 벡터 $\underline{x_0} = \begin{bmatrix} 
 x_{01} \\\\ 
-x_{02} \end{bmatrix}$에 대해 가중치 벡터가 $\underline{w} = \begin{bmatrix} 4 \\\\ 1 \end{bmatrix}$라고 하면 $\langle \underline{w}, \underline{x_0} \rangle = \begin{bmatrix} 
+x_{02} \end{bmatrix}$에 대해 가중치 벡터가 $\underline{w} = \begin{bmatrix} 1 \\\\ 4 \end{bmatrix}$라고 하면 $\langle \underline{w}, \underline{x_0} \rangle = \begin{bmatrix} 
 x_{01} & 
-x_{02} \end{bmatrix} \begin{bmatrix} 4 \\\\ 1 \end{bmatrix} =
-4x_{01} + 
-x_{02}$이므로 아래와 같은 선형 모델이 만들어질 것이다.
+x_{02} \end{bmatrix} \begin{bmatrix} 1 \\\\ 4 \end{bmatrix} =
+x_{01} + 
+4x_{02}$이므로 아래와 같은 선형 모델이 만들어질 것이다.
 
 ![img0](/images/machine-learning/20240321/img0.png)
 
@@ -143,7 +143,7 @@ $$
 일 때,
 
 $$
-\underline{\hat{y}} = \begin{bmatrix} y_1 \\\\ y_2 \\\\ \vdots \\\\ y_n \end{bmatrix} = 
+\underline{\hat{y}} = \begin{bmatrix} \hat{y_1} \\\\ \hat{y_2} \\\\ \vdots \\\\ \hat{y_n} \end{bmatrix} = 
 \begin{bmatrix}
 x_{11} 
 & x_{12} 
@@ -191,12 +191,12 @@ $$
 
 이때 위의 $X$와 같은 행렬을 방데르몽드 행렬(Vandermonde matrix)이라 부른다.
 
-### 2.5 알아두어야 할 선형대수 지식
+### 2.5 알아두어야 할 선형대수 개념
 
-1. 행렬 분해(Matrix Decomposition)
+1. 행렬 분해(matrix decomposition)
 
 하나의 행렬 $X$는 두 행렬의 곲으로 표현될 수도 있다. 예를 들어 $X \in \mathbb{R}^{n \times p}$일 때, 해당 행렬이 $X = UV$로 표현될 수 있다면 $U \in \mathbb{R}^{n \times r}$, $V \in \mathbb{R}^{r \times p}$이다.
-행렬 분해의 방법들 중 대표적으로 LU 분해, QR 분해, 고윳값 분해(Eigen-value Decomposition), 스펙트럼 분해(Spectral Decomposition), 특이값 분해(SVD: Singular Value Decomposition)가 있지만 추후 수업 내용으로 나올 것이다. 행렬 분해는 데이터 차원 축소를 위해 필요하다.
+행렬 분해의 방법들 중 대표적으로 LU 분해, QR 분해, 고유값 분해(eigen-value decomposition), 스펙트럼 분해(spectral decomposition), 특이값 분해(SVD: Singular Value Decomposition)가 있지만 추후 수업 내용으로 나올 것이다. 행렬 분해는 데이터 차원 축소를 위해 필요하다.
 
 2. 벡터의 내적(Inner Product)과 외적(Outer Product)
 
@@ -210,7 +210,7 @@ $$ \underline{u} \cdot \underline{v} = \underline{u}^T \underline{v} = \begin{bm
 
 $$ \underline{u} \otimes \underline{v} = \underline{u} \underline{v}^T = \begin{bmatrix} u_1 \\\\ u_2 \\\\ \vdots \\\\ u_n \end{bmatrix} \begin{bmatrix} v_1 & v_2 & \dots & v_n \end{bmatrix} = \begin{bmatrix} u_1 v_1 & u_1 v_2 & \dots & u_1 v_n \\\\ u_2 v_1 & u_2 v_2 & \dots & u_2 v_n \\\\ \vdots & \vdots & \ddots & \vdots \\\\ u_n v_1 & u_n v_2 & \dots & u_n v_n \end{bmatrix}$$
 
-우리가 흔히 벡터의 외적으로 알고 있는 $u \times v$는 벡터곱(Cross Product)이며 결과는 방향은 두 벡터에 수직이고 크기는 두 벡터가 이루는 정사각형의 넓이인 벡터이다. ( $ \lvert \underline{u} \times \underline{v} \rvert = \lvert \underline{u} \rvert \lvert \underline{v} \rvert \sin{\theta}$ )
+우리가 흔히 벡터의 외적으로 알고 있는 $\underline{u} \times \underline{v}$는 벡터곱(cross product)이며 결과는 방향은 두 벡터에 수직이고 크기는 두 벡터가 이루는 정사각형의 넓이인 벡터이다. ( $ \lvert \underline{u} \times \underline{v} \rvert = \lvert \underline{u} \rvert \lvert \underline{v} \rvert \sin{\theta}$ )
 
 3. Orthogoanl(직교), Norm(놈), Orthonormal(정규 직교)
 

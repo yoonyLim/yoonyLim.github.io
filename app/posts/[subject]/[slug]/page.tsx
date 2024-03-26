@@ -22,7 +22,7 @@ export default function PostPage(props: any) {
 
                 headingNavs.push(
                     <div className="flex">
-                        { Array.from({ length: numHashInH }, (_, i) => <span key={i} className="mr-4"></span>) }
+                        { Array.from({ length: numHashInH - 1 }, (_, i) => <span key={i} className="mr-4"></span>) }
                         <a 
                             href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}
                             className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 hover:translate-x-1.5 transition duration-200 ease-in-out"

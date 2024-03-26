@@ -22,7 +22,7 @@ export default function Feed(props: {postMetadata: any }) {
         )).slice(start, end);
 
         return (
-            <div className="flex flex-col justify-center items-center md:pl-10 z-0">
+            <div className="w-full flex flex-col justify-center items-center xl:pl-10 z-0">
                 <div className="w-full flex justify-between items-center mb-4 select-none">
                     <h2 className="mr-4 font-light text-xl">{subject} 최신 글</h2>
                 </div>

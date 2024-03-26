@@ -18,11 +18,18 @@ export default function PostPage(props: any) {
 
         if (post.content.match(rgx)) {
             for (var i = 0; i < post.content.match(rgx)!.length; i++) {
+                const numHashInH = post.content.match(rgx)![i].match(/#/g)!.length;
+
                 headingNavs.push(
-                    <a 
-                        href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}
-                        className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 hover:translate-x-1.5 transition duration-200 ease-in-out"
-                    >{ post.content.match(rgx)![i].replaceAll('#', "") }</a>
+                    <div className="flex">
+                        { Array.from({ length: numHashInH }, (_, i) => <span key={i} className="mr-4"></span>) }
+                        <a 
+                            href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}
+                            className="flex w-fit max-w-72 my-2 text-ellipsis hover:text-gray-400 hover:dark:text-gray-500 hover:translate-x-1.5 transition duration-200 ease-in-out"
+                        >
+                            { post.content.match(rgx)![i].replaceAll('#', "") }
+                        </a>
+                    </div>
                 )
             }
         }

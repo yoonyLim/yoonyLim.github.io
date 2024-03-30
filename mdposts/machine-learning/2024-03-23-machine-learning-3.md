@@ -5,7 +5,7 @@ date: "2024-03-23"
 use-math: true
 ---
 
-# [Machine Learning 정리 노트 2] Least Squares and Optimization in Machine Learning
+# [Machine Learning 정리 노트 3] Least Squares and Optimization in Machine Learning
 
 ## 1. 개요
 

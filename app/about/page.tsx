@@ -5,6 +5,7 @@ export default function AboutPage(props: any) {
             <span>저에 대한 정보는 다음과 같아요!</span>
             <br />
             <hr className="h-px border-0 bg-gray-300 dark:bg-gray-600" />
+            {/* =====Goals===== */}
             <h2 className="font-bold text-gray-500">GOALS</h2>
             <ul>
                 <li>콘솔 게임 개발자: 한국 게임 업계 부족한 콘솔 게임 산업의 인력으로 성장하기</li>
@@ -12,6 +13,7 @@ export default function AboutPage(props: any) {
             </ul>
             <br />
             <hr className="h-px border-0 bg-gray-300 dark:bg-gray-600" />
+            {/* =====Toy Projects===== */}
             <h2 className="font-bold text-gray-500">TOY PROJECTS</h2>
             <ul>
                 <li>
@@ -46,6 +48,7 @@ export default function AboutPage(props: any) {
             </ul>
             <br />
             <hr className="h-px border-0 bg-gray-300 dark:bg-gray-600" />
+            {/* =====Interests===== */}
             <h2 className="font-bold text-gray-500">INTERESTS</h2>
             <ul className="space-y-4">
                 <li>취미: 콘솔 및 스팀 게임 플레이, 애니메이션 시청, 웹 및 게임 개발 공부</li>
@@ -137,8 +140,9 @@ export default function AboutPage(props: any) {
                         <li>닌텐도 스위치 스포츠<span className="text-gray-500">(2022)</span></li>
                         <li>용과 같이 제로<span className="text-gray-500">(2015)</span></li>
                         <li>용과 같이 극<span className="text-gray-500">(2016)</span></li>
-                        <li>콜 오브 듀티: 모던 워페어 Remastered<span className="text-gray-500">(2017)</span></li>
+                        <li>콜 오브 듀티: 모던 워페어 Remastered<span className="text-gray-500">(2016)</span></li>
                         <li>배틀필드 1<span className="text-gray-500">(2016)</span></li>
+                        <li>호라이즌 제로 던 + 더 프로즌 와일즈<span className="text-gray-500">(2017)</span></li>
                         <li>레드 데드 리뎀션 2<span className="text-gray-500">(2018)</span></li>
                         <li>마인크래프트<span className="text-gray-500">(2011)</span></li>
                         <li>언더테일<span className="text-gray-500">(2015)</span></li>

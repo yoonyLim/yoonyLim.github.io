@@ -46,4 +46,119 @@ $$ = \underline{w}^{(k)} - 2 X^T \tau ( X \underline{w}^{(k)} - y ) $$
 
 그리고 해당 함수의 반복이 멈추는 조건은 $\lVert \underline{w}^{(k + 1)} - \underline{w}^{(k)} \rVert_2 < \epsilon$이다.
 
-### 2.4 경사 하강법(Gradient Descent) 주피터 노트북
+### 2.4 경사 하강법(Gradient Descent) Jupyter Notebook
+
+경사 하강법이 어떻게 Python 코드로 표현될 수 있는지 살펴보도록 한다. Python은 당연히 설치되어 있어야 하며 Jupyter Notebook 환경에서 코드를 실행한다.
+
+#### 2.4.1 사전 준비
+
+아래의 코드로 다음 패키지들을 설치한다.
+
+```python
+!pip install numpy matplotlib pandas seaborn plotly
+```
+
+#### 2.4.2 경사 하강법 시각적 그래프
+
+1. 아래의 코드로 패키지들을 import한다.
+
+```python
+import numpy as np
+import numpy.matlib as mat
+import numpy.linalg as la
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+2. numpy를 이용하여 랜덤한 스칼라 값들을 포함하는 $50 \times 1$의 행렬 $X$를 생성한다. 그리고 가중치 벡터 $w$를 스칼라 값 0.7을 갖는 행렬로 생성한다. 이후 레이블 벡터 $y$를 행렬 $X$와 $w$의 곱으로 표현한다.
+
+```python
+n = 50
+p = 1 # just 1 feature as an example
+X = np.matrix(np.random.rand(n, p))
+w_true = np.matrix(0.7) # optimal weight value = 0.7
+y = X@w_true   
+```
+
+3. 이제 $f(\underline{w}) = \lVert \underline{y} - X \underline{w} \rVert^2$임을 사용하여 가중치 벡터에 대한 함수 f를 $L^2$ norm을 사용하여 아래와 같은 코드로 구현하여 그래프 생성 후 표시한다.
+
+```python
+N = 200
+w = np.reshape(np.matrix(np.linspace(0,1,N)),(p,N)) # reshape w for calculation
+f = np.square(la.norm(mat.repmat(y,1,N) - X@w,2,0)) # f(w)
+
+plt.plot(w.T, f, linewidth = 2)
+plt.title("Squared error loss for different candidate w")
+plt.xlabel('w')
+plt.ylabel('f(w)')
+plt.ylim([-0.5,8.5])
+plt.show()
+```
+
+![img2](/images/machine-learning/20240330/img2.png)
+
+4. 첫 가중치 벡터를 무작위로 0.2를 지정하고 해당 지점에서의 법선을 먼저 경사인 gradf_1을 $\nabla_\underline{w} f(\underline{w}) = 2X^T (X \underline{w} - y)$임을 이용하여 구한 다음 지점 위치에서 그려준다.
+
+```python
+w_1 = np.matrix(0.2) # w1 = initial guess = 0.2
+f_1 = la.norm(y-X@w_1)**2
+
+gradf_1 = 2*X.T@(X@w_1-y)
+tangent_1 = f_1 + gradf_1@(w-w_1)
+
+plt.plot(w.T, f, w_1, f_1, '*', w.T, tangent_1.T, linewidth = 2)
+plt.title("Squared error loss for different candidate w")
+plt.xlabel('w')
+plt.ylabel('f(w)')
+plt.ylim([-0.5,8.5])
+plt.show()
+```
+
+![img3](/images/machine-learning/20240330/img3.png)
+
+5. 스텝 사이즈은 tau를 0.02로 설정한 뒤 다음 가중치 벡터 w_2의 지점을 $\underline{w}^{(k + 1)} = \underline{w}^{(k)} - \tau \nabla_\underline{w} f(\underline{w}^{(k)})$임을 사용하여 구한다. 해당 지점에서의 경사인 gradf_2도 새로운 놈도 구하여 그려준다.
+
+```python
+tau = .02 # step size 
+w_2 = w_1 - tau*gradf_1 # w2
+f_2 = la.norm(y-X@w_2)**2
+gradf_2 = 2*X.T@(X@w_2-y)
+tangent_2 = f_2 + gradf_2@(w-w_2)
+
+plt.plot(w.T, f, w_2, f_2, '*', w.T, tangent_2.T, linewidth = 2)
+plt.title("Squared error loss for different candidate w")
+plt.xlabel('w')
+plt.ylabel('f(w)')
+plt.ylim([-0.5,8.5])
+plt.show()
+```
+
+![img4](/images/machine-learning/20240330/img4.png)
+
+6. 똑같이 스텝 사이즈 tau를 0.02로 설정하고 5번을 반복하며 최적의 가중치 벡터를 구하는 코드를 for 문을 통해 구현 후 그래프로 그린다.
+
+```python
+tau = .02 # step size
+max_iter = 5
+w_hat = np.matrix(np.zeros((max_iter+1,1)))
+f_hat = np.matrix(np.zeros((max_iter+1,1)))
+w_hat[0] = 0.05 
+f_hat[0] = la.norm(y-X@w_hat[0])**2
+
+for k in range(max_iter):
+    gradf = 2*X.T@(X@w_hat[k]-y)
+    w_hat[k+1] = w_hat[k] - tau*gradf
+    f_hat[k+1] = la.norm(y-X@w_hat[k+1])**2
+    
+plt.plot(w.T, f, w_hat, f_hat, '-*', linewidth = 2)
+plt.title("Squared error loss for different candidate w")
+plt.xlabel('w')
+plt.ylabel('f(w)')
+plt.ylim([-0.5,8.5])
+plt.show()
+```
+![img5-1](/images/machine-learning/20240330/img5-1.png)
+
+스텝 사이즈를 더 작게 0.001로 잡으면 더 작게 이동하며 다음 가중치 벡터로 이동하는 모습을 볼 수 있다.
+
+![img5-2](/images/machine-learning/20240330/img5-2.png)

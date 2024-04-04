@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning 정리 노트 4"
 subtitle: "Gradient Descent for Least Squares"
-date: "2024-03-30"
+date: "2024-03-21"
 use-math: true
 ---
 
@@ -25,14 +25,14 @@ use-math: true
 
 $\underline{\hat{w}}$가 잔차를 최소화하는 가중치 벡터라고 할 때, $\underline{\hat{w}} = \underset{\underline{w}}{\text{argmin}} \lVert \underline{y} - X \underline{w} \rVert^2$는 다시 $\underline{\hat{w}} = (X^T X)^{-1} X^T \underline{y}$임을 이전 두 개의 포스트에서 각각 기학학적 관점과 최적화 관점으로 다루었다. 그러나 이때의 문제점은 특성 행렬 $X$가 매우 큰 차원을 가지게 되면 $(X^T X)^{-1}$을 구하는 연산은 매우 무거워진다. 이에 따라 경사 하강법을 사용하면 행렬의 역행렬을 구할 필요 없이 $\underline{\hat{w}}$을 반복적인 수행을 통해 구할 수 있다.
 
-![img0](/images/machine-learning/20240330/img0.png)
+![img0](/images/machine-learning/20240321/img0.png)
 *출처: 이원희 교수, "Gradient Descent for Least Squares" (기계 학습, 경희대학교, 2024년 3월 21일)*
 
 가중치 벡터에 대한 함수 $f(\underline{w})$는 위 그림을 이용하여 나타낼 수 있다. 만약 현재 지점의 가중치 벡터 $\underline{v}$와 해당 벡터와 최소값의 가중치 벡터 사이에 있는 가중치 벡터 $\underline{w}$에 대해, $f(\underline{w})$가 $\underline{v}$와 $\underline{w}$로 이루어진 직선의 방정식보다 크거나 같으면 아래로 볼록하다는 의미가 된다. 즉, 모든 $\underline{w}$, $\underline{v}$에 대해 $f(\underline{w}) \geq f(\underline{v} + \nabla f(\underline{v})^T (\underline{w} - \underline{v}))$이면 $f(\underline{w})$은 아래로 볼록한 그래프이다. 해당 직선의 방정식은 $\underline{v}$가 상수 $a$, $\underline{w}$가 변수 $x$라고 생각하고 해당 그래프가 $XY$ 그래프 위에 있다고 생각하여 $f(a) + f'(a)(x - a)$와 비슷한 형태의 그래프이다.
 
 그러나 아래와 같은 경우 그래프의 모든 점들이 한 지점에서의 접선보다 위에 있지 않은 경우들이 있다. 이에 따라 우리는 경사 하강법을 사용할 때 전역 최소값을 구하지 못하고 지역 최소값을 구하게 될 수도 있는 주의점이 있다. 이 때문에 경사 이동의 크기를 "적절히" 조정하여 전역 최소값을 반복적인 실험을 통해 알아내는 수밖에 없다.
 
-![img1](/images/machine-learning/20240330/img1.png)
+![img1](/images/machine-learning/20240321/img1.png)
 
 ### 2.3 경사 하강법(Gradient Descent) 과정
 
@@ -95,7 +95,7 @@ plt.ylim([-0.5,8.5])
 plt.show()
 ```
 
-![img2](/images/machine-learning/20240330/img2.png)
+![img2](/images/machine-learning/20240321/img2.png)
 
 4. 첫 가중치 벡터를 무작위로 0.2를 지정하고 해당 지점에서의 법선을 먼저 경사인 gradf_1을 $\nabla_\underline{w} f(\underline{w}) = 2X^T (X \underline{w} - y)$임을 이용하여 구한 다음 지점 위치에서 그려준다.
 
@@ -114,7 +114,7 @@ plt.ylim([-0.5,8.5])
 plt.show()
 ```
 
-![img3](/images/machine-learning/20240330/img3.png)
+![img3](/images/machine-learning/20240321/img3.png)
 
 5. 스텝 사이즈은 tau를 0.02로 설정한 뒤 다음 가중치 벡터 w_2의 지점을 $\underline{w}^{(k + 1)} = \underline{w}^{(k)} - \tau \nabla_\underline{w} f(\underline{w}^{(k)})$임을 사용하여 구한다. 해당 지점에서의 경사인 gradf_2도 새로운 놈도 구하여 그려준다.
 
@@ -133,7 +133,7 @@ plt.ylim([-0.5,8.5])
 plt.show()
 ```
 
-![img4](/images/machine-learning/20240330/img4.png)
+![img4](/images/machine-learning/20240321/img4.png)
 
 6. 똑같이 스텝 사이즈 tau를 0.02로 설정하고 5번을 반복하며 최적의 가중치 벡터를 구하는 코드를 for 문을 통해 구현 후 그래프로 그린다.
 
@@ -157,8 +157,8 @@ plt.ylabel('f(w)')
 plt.ylim([-0.5,8.5])
 plt.show()
 ```
-![img5-1](/images/machine-learning/20240330/img5-1.png)
+![img5-1](/images/machine-learning/20240321/img5-1.png)
 
 스텝 사이즈를 더 작게 0.001로 잡으면 더 작게 이동하며 다음 가중치 벡터로 이동하는 모습을 볼 수 있다.
 
-![img5-2](/images/machine-learning/20240330/img5-2.png)
+![img5-2](/images/machine-learning/20240321/img5-2.png)

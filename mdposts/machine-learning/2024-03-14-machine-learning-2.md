@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning 정리 노트 2"
 subtitle: "Least Squares and Geometry in Machine Learning"
-date: "2024-03-22"
+date: "2024-03-14"
 use-math: true
 ---
 
@@ -24,7 +24,7 @@ use-math: true
 
 ### 2.2 최소 제곱법/최소 자승법(Least Square Method/Least Square Estimation)의 기하학적 관점
 
-[저번 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-21-machine-learning-1)를 통해 우리는 예측되는 레이블 벡터는 $\underline{\hat{y}} = X \underline{w}$로 표현된다는 것을 알고 있다. 그렇다면 가중치 벡터 $\underline{w}$는 어떻게 결정할 수 있을까?
+[저번 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-12-machine-learning-1)를 통해 우리는 예측되는 레이블 벡터는 $\underline{\hat{y}} = X \underline{w}$로 표현된다는 것을 알고 있다. 그렇다면 가중치 벡터 $\underline{w}$는 어떻게 결정할 수 있을까?
 
 해당 질문에 대한 답으로 최소 제곱법 혹 최소 자승법으로 불리는 방법을 사용한다. 잔차는 $r_i = y_i - \hat{y}_i$으로 표현되고 이 중 잔차와 예측하는 레이블은 가중치 벡터 $\underline{w}$에 의존적이므로 $r_i(\underline{w}) = y_i - \hat{y}_i(\underline{w})$로도 표현한다. 즉, 가중치 벡터 $\underline{w}$의 각 가중치들을 조절하여 실제 레이블 값과 예측 레이블 값의 차이를 줄여 가장 작은 잔차를 이룰 수 있다.
 
@@ -39,11 +39,11 @@ use-math: true
 
 간단한 예시를 통해 기하학적 이해를 이끌어내 보자. 행렬 $X$가 2개의 특성 벡터를 지닌다 가정하면 아래 그림과 같이 실제 레이블 벡터 $\underline{y}$, 최적의 예측 레이블 벡터 $\underline{\hat{y}}$, 가장 작은 잔차 벡터 $\underline{r}$, 벡터 공간 $\text{span}(\text{cols}(X))$과의 관계를 나타낼 수 있다. 이때 가장 작은 잔차 벡터라 하면 실제 레이블 벡터와 벡터 공간 간의 거리가 가장 작을 때의 예측 레이블 벡터를 의미하기에 $\underline{r}$은 벡터 공간에 수직일 수밖에 없다.
 
-![img0](/images/machine-learning/20240322/img0.png)
+![img0](/images/machine-learning/20240314/img0.png)
 
 그리고 아직 최적에 이르지 못한 예측 레이블 벡터 $\underline{\tilde{y}}$라 하고 해당 벡터와 실제 레이블 벡터 간의 잔차 벡터 $\underline{\tilde{r}}$를 추가하면 $\underline{\hat{y}}$과 $\underline{\tilde{y}}$의 차이 벡터를 $\underline{d}$라 했을 때 아래와 같은 관계가 완성된다. 당연하게도 아직 최적화되지 않은 잔차 벡터 $\underline{\tilde{r}}$는 벡터 공간에 수직이지 않고 피타고라스 정리에 따라 $\lVert \underline{\tilde{r}} \rVert ^2 = \lVert \underline{r} \rVert ^2 + \lVert \underline{d} \rVert ^2$에서 $\underline{d} \neq 0$이므로 $\lVert \underline{\tilde{r}} \rVert ^2 > \lVert \underline{r} \rVert ^2$이다.
 
-![img1](/images/machine-learning/20240322/img1.png)
+![img1](/images/machine-learning/20240314/img1.png)
 
 위 그림에서 보이듯 잔차를 줄여나가 최적의 상태에 도달하도록 해야 한다. 이제 다시 가중치 벡터로 돌아와 어떻게 해당 개념이 가중치 벡터를 결정하게 되는지 살펴본다.
 

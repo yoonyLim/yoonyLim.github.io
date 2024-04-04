@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning 정리 노트 1"
 subtitle: "Vectors and Matrices"
-date: "2024-03-21"
+date: "2024-03-12"
 use-math: true
 ---
 
@@ -100,7 +100,7 @@ x_{02} \end{bmatrix} \begin{bmatrix} 1 \\\\ 4 \end{bmatrix} =
 x_{01} + 
 4x_{02}$이므로 아래와 같은 선형 모델이 만들어질 것이다.
 
-![img0](/images/machine-learning/20240321/img0.png)
+![img0](/images/machine-learning/20240312/img0.png)
 
 이때 $y$축은 $x_{02}$를 의미하고
 $x$ 축은 $x_{01}$을 의미한다.
@@ -181,7 +181,7 @@ $$\underline{\hat{y}} = X \underline{w} = \begin{bmatrix} 1 & 2 \\\\ 3 & 5 \\\\ 
 
 기계 학습은 선형 모델과 같이 단순한 예측으로만 이루어지지 않는다. 오히려 실제 환경에서는 많은 실험 관측들이 비선형적인 모델이기에 선형 모델만으로 회귀 및 분류를 이루어낼 수는 없다. 그렇지만 선형 모델의 개념을 활용하면 비선형 모델 또한 생성해낼 수 있다. 아래와 같은 3차 그래프와 같은 비선형 모델이 있다고 하자.
 
-![img1](/images/machine-learning/20240321/img1.png)
+![img1](/images/machine-learning/20240312/img1.png)
 
 위 비선형 모델은 차수가 3이므로 특성 개수 $p$가 4인(${z_i}^0$, ${z_i}^1$, ${z_i}^2$, ${z_i}^3$) $n$개의 샘플로 이루어진 행렬과 가중치 벡터의 곱으로 표현할 수 있다.
 

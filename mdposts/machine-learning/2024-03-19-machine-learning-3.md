@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning 정리 노트 3"
 subtitle: "Least Squares and Optimization in Machine Learning"
-date: "2024-03-23"
+date: "2024-03-19"
 use-math: true
 ---
 
@@ -20,9 +20,9 @@ use-math: true
 
 ### 2.2 분류 규칙(Classification Rule)
 
-예측한 레이블이 -1 혹은 1로 분류될 수 있어서 $y_i \in \\{-1, +1\\}$이라고 하자. 이때 [이전 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-22-machine-learning-2)에서 이끌어낸 잔차를 최소화하는 가중치 벡터 $\underline{\hat{w}}$을 활용하면 예측한 레이블 벡터는 $\underline{\hat{y}} = X \underline{\hat{w}}$로 표현할 수 있다. 그러나 $\underline{\hat{y}}$의 스칼라들은 정확하게 -1이나 1의 값이 아니라 어떠한 실수 값으로 존재한다. 이에 따라 예측한 레이블을 바탕으로 분류할 수 있는 규칙이 필요하다. 따라서 아래와 같은 부호 함수(sign function)을 통해 음수 레이블은 -1, 양수 레이블은 1로 조정할 수 있다. 이때 해당 부호 함수는 활성화 함수(activation function)이다. 이에 따라 새로운 예측 레이블 $\tilde{y}_i$는 $\tilde{y}_i = \text{sign}(\hat{y}_i) \in \\{-1, +1\\}$로 표현되어 우리의 예측 레이블이 실제 레이블과 같은지 혹 다른지 판단할 수 있는 기준이 된다.
+예측한 레이블이 -1 혹은 1로 분류될 수 있어서 $y_i \in \\{-1, +1\\}$이라고 하자. 이때 [이전 포스트](https://yoonylim.github.io/posts/machine-learning/2024-03-14-machine-learning-2)에서 이끌어낸 잔차를 최소화하는 가중치 벡터 $\underline{\hat{w}}$을 활용하면 예측한 레이블 벡터는 $\underline{\hat{y}} = X \underline{\hat{w}}$로 표현할 수 있다. 그러나 $\underline{\hat{y}}$의 스칼라들은 정확하게 -1이나 1의 값이 아니라 어떠한 실수 값으로 존재한다. 이에 따라 예측한 레이블을 바탕으로 분류할 수 있는 규칙이 필요하다. 따라서 아래와 같은 부호 함수(sign function)을 통해 음수 레이블은 -1, 양수 레이블은 1로 조정할 수 있다. 이때 해당 부호 함수는 활성화 함수(activation function)이다. 이에 따라 새로운 예측 레이블 $\tilde{y}_i$는 $\tilde{y}_i = \text{sign}(\hat{y}_i) \in \\{-1, +1\\}$로 표현되어 우리의 예측 레이블이 실제 레이블과 같은지 혹 다른지 판단할 수 있는 기준이 된다.
 
-![img0](/images/machine-learning/20240323/img0.png)
+![img0](/images/machine-learning/20240319/img0.png)
 
 위에서 제시한 모델을 토대로 새로운 샘플인 벡터 $\underline{x}_\text{new} \in \mathbb{R}^p$에 대한 분류를 진행할 수 있다. 새로운 샘플에 대한 예측 레이블 벡터는 
 $\underline{\hat{y}}_\text{new} = 
@@ -72,12 +72,12 @@ p.d.인 행렬 $Q$와 영벡터가 아닌 벡터 $\underline{x}$에 대해 $\und
 
 이에 따라 영벡터가 아닌 벡터 $\underline{x} \in \mathbb{R}^2$, p.d.인 행렬 $Q \in \mathbb{R}^{2 \times 2}$에 대해 간단히 $Q = \begin{bmatrix} 1 & 0 \\\\ 0 & 1 \end{bmatrix} = I$라 하면 $f(\underline{x}) = \underline{x}^T Q \underline{x} = \underline{x_1}^2 + \underline{x_2}^2$이며 이는 아래 그래프와 같다.
 
-![img1](/images/machine-learning/20240323/img1.png)
+![img1](/images/machine-learning/20240319/img1.png)
 
 위에서 $x$축은 $x_1$, $y$축은 $x_2$를 나타낸다. 위 그래프는 아래로 볼록한 그래프이므로 $f(\underline{x})$의 최소값을 찾기 쉽다. 이때 최솟값은 꼭짓점일 것이다. 그렇지만 해당 점에서는 $\underline{x}$가 영벡터인 꼴이고 많은 실질적인 상황에서는 최소값이 영벡터일 때는 찾기 힘들 것이다.<br>
 반대로 $Q = \begin{bmatrix} -1 & 0 \\\\ 0 & -1 \end{bmatrix}$인 음의 정부호 행렬(Negative Definite Matrix)일 때는 아래와 같은 그래프가 생성되며 최소값을 찾기가 매우 어려워진다. 따라서 $\underline{\hat{w}}$을 최소화하여 최적화하는 과정에 p.d.인 행렬인 $X^T X$를 활용하는 것은 매우 중요하다.
 
-![img2](/images/machine-learning/20240323/img2.png)
+![img2](/images/machine-learning/20240319/img2.png)
 
 처음 시작한 $\underline{\hat{w}}$ 대한 식은 $\underline{w}$의 함수이므로 $f(\underline{w})$라 할 수 있다. 이때 가중치 벡터 $\underline{w}$에 대한 그래디언트(고차원에서의 미분이라 생각하면 된다)는 $\nabla_\underline{w}f$로 표현할 수 있다. 해당 그래디언트는 다음과 같은 의미를 가진다.
 

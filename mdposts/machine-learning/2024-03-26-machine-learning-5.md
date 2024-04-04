@@ -21,7 +21,12 @@ use-math: true
 
 ### 2.2 정규 직교 기저(Orthonormal Basis)
 
-부분 공간 $\mathcal{S}$에 속하는 두 벡터 $\underline{x}$와 $\underline{y}$가 있다고 하자.
+부분 공간 $\mathcal{S}$에 속하는 두 벡터 $\underline{x}$와 $\underline{y}$가 있다고 하자. 이때 해당 벡터의 상수배 합은 당연하게도 $\alpha \underline{x} + \beta \underline{y} \in \mathcal{S}$처럼 원래 부분 공간에 속한다. 그렇다면 특성 행렬 $X$를 다른 두 행렬 $U$와 $V$의 곱으로 표현이 가능하다고 하다. 이때 $U$나 $V$가 직교 행렬이여서 특성 행렬 $X$를 직교 행렬로 다시 표현 가능하다면 원래의 특성을 유지하면서도 차원을 줄일 수 있다는 의미가 된다.
+
+그렇다면 정규 행렬에 대한 특징을 살펴보자. 정규 행렬은 정규 직교 벡터들로 이루어진 행렬로 각 벡터들은 서로에 대해 수직이며 각 벡터의 크기인 $L^2$ norm은 모두 1이 된다. 즉, 두 정규 직교 벡터 $\underline{u_1}$과 $\underline{u_2}$에 대해 수식으로 나타내면 다음과 같은 성질이 성립한다.
+
+$$ \langle \underline{u_1}, \underline{u_2}  \rangle = \underline{u_1} \cdot \underline{u_2} = \underline{u_1}^T \underline{u_2} = 0 $$
+$$ \lVert \underline{u_1} \rVert_2 = 1 $$
 
 ### 2.3 투영(Projection)
 

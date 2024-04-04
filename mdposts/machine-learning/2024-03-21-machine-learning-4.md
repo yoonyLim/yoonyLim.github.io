@@ -162,3 +162,73 @@ plt.show()
 스텝 사이즈를 더 작게 0.001로 잡으면 더 작게 이동하며 다음 가중치 벡터로 이동하는 모습을 볼 수 있다.
 
 ![img5-2](/images/machine-learning/20240321/img5-2.png)
+
+#### 2.4.3 경사 하강법의 간단한 수식 표현 및 스텝 사이즈의 중요성
+
+앞선 내용을 종합하자면 현재 가중치 벡터를 $\underline{x}^{(t)}$, 다음 가중치 벡터를 $\underline{x}^{(t + 1)}$이라 하고 스텝 사이즈를 $\alpha$라 하면 다음과 같은 간단한 수식 이 완성된다.
+
+$$ \underline{x}^{(t + 1)} = \underline{x}^{(t)} - \alpha \frac{d}{d\underline{x}} f(\underline{x}) $$
+
+이를 4차 함수로 된 가중치 벡터에 대한 그래프로 실험하기 위해 코드로 나타내면 아래와 같다.
+
+- 경사값 계산 및 배열 반환 함수:
+
+```python
+def gradient_descent(df, initial_guess, alpha, n):
+    """Performs n steps of gradient descent on df using learning rate alpha starting 
+       from initial_guess. Returns a numpy array of all guesses over time."""
+    guesses = [initial_guess]
+    current_guess = initial_guess
+    while len(guesses) < n:
+        current_guess = current_guess - alpha * df(current_guess)
+        guesses.append(current_guess)
+        
+    return np.array(guesses)
+```
+
+- 4차 함수 값 반환 함수:
+
+```python
+def arbitrary(x):
+    return (x**4 - 15*x**3 + 80*x**2 - 180*x + 144)/10
+```
+
+- 4차 함수를 $x$에 대해 미분한 값 반환 함수:
+
+```python
+def derivative_arbitrary(x):
+    return (4*x**3 - 45*x**2 + 160*x - 180)/10
+```
+
+- 1부터 7까지의 $x$축 범위와 -1에서 3까지의 $y$축 범위에서 100개의 임의의 점을 찍어 그래프를 그리는 함수:
+
+```python
+import numpy as np
+import matplotlib.pylot as plt
+
+def plot_arbitrary():
+    x = np.linspace(1, 7, 100)
+    plt.plot(x, arbitrary(x))
+    axes = plt.gca()
+    axes.set_ylim([-1, 3])
+```
+
+이때 알파값, 즉 스텝 사이즈를 다르게 주며 변화를 관찰하기 위해 처음은 스텝 사이즈를 0.6으로 관측하여 20번 경사 하강을 반복하고 결과를 표현한다.
+
+```python
+trajectory = gradient_descent(derivative_arbitrary, 1.6, 0.6, 20)
+plot_arbitrary()
+plt.plot(trajectory, arbitrary(trajectory));
+```
+
+![img6-1](/images/machine-learning/20240321/img6-1.png)
+
+비록 지역 최소값에 도달했지만 이는 전역 최소값은 아니다. 그렇지만 스텝 사이즈를 0.9로 늘리면 결과는 아래와 같이 전역 최소값에 도달한다.
+
+![img6-2](/images/machine-learning/20240321/img6-2.png)
+
+그렇지만 만약 스텝 사이즈를 1.8과 같은 값으로 너무 많이 늘리면 아래와 같이 큰 오차를 불러오게 된다.
+
+![img6-3](/images/machine-learning/20240321/img6-3.png)
+
+즉, 경사 하강법을 통해 최적의 가중치 벡터를 찾기 위해서는 "적절한" 스텝 사이즈를 찾는 것이 매우 중요하다.

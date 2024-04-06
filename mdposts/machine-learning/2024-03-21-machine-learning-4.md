@@ -74,9 +74,9 @@ import matplotlib.pyplot as plt
 
 ```python
 n = 50
-p = 1 # just 1 feature as an example
+p = 1 #just 1 feature as an example
 X = np.matrix(np.random.rand(n, p))
-w_true = np.matrix(0.7) # optimal weight value = 0.7
+w_true = np.matrix(0.7) #optimal weight value = 0.7
 y = X@w_true   
 ```
 
@@ -84,8 +84,8 @@ y = X@w_true
 
 ```python
 N = 200
-w = np.reshape(np.matrix(np.linspace(0,1,N)),(p,N)) # reshape w for calculation
-f = np.square(la.norm(mat.repmat(y,1,N) - X@w,2,0)) # f(w)
+w = np.reshape(np.matrix(np.linspace(0,1,N)),(p,N)) #reshape w for calculation
+f = np.square(la.norm(mat.repmat(y,1,N) - X@w,2,0)) #f(w)
 
 plt.plot(w.T, f, linewidth = 2)
 plt.title("Squared error loss for different candidate w")
@@ -100,7 +100,7 @@ plt.show()
 4. 첫 가중치 벡터를 무작위로 0.2를 지정하고 해당 지점에서의 법선을 먼저 경사인 gradf_1을 $\nabla_\underline{w} f(\underline{w}) = 2X^T (X \underline{w} - y)$임을 이용하여 구한 다음 지점 위치에서 그려준다.
 
 ```python
-w_1 = np.matrix(0.2) # w1 = initial guess = 0.2
+w_1 = np.matrix(0.2) #w1 = initial guess = 0.2
 f_1 = la.norm(y-X@w_1)**2
 
 gradf_1 = 2*X.T@(X@w_1-y)
@@ -116,11 +116,13 @@ plt.show()
 
 ![img3](/images/machine-learning/20240321/img3.png)
 
-5. 스텝 사이즈은 tau를 0.02로 설정한 뒤 다음 가중치 벡터 w_2의 지점을 $\underline{w}^{(k + 1)} = \underline{w}^{(k)} - \tau \nabla_\underline{w} f(\underline{w}^{(k)})$임을 사용하여 구한다. 해당 지점에서의 경사인 gradf_2도 새로운 놈도 구하여 그려준다.
+5. 스텝 사이즈은 tau를 0.02로 설정한 뒤 다음 가중치 벡터 w_2의 지점을 $\underline{w}^{(k + 1)} = \underline{w}^{(k)} \tau 
+\nabla_\underline{w}
+f(\underline{w}^{(k)})$임을 사용하여 구한다. 해당 지점에서의 경사인 gradf_2도 새로운 놈도 구하여 그려준다.
 
 ```python
-tau = .02 # step size 
-w_2 = w_1 - tau*gradf_1 # w2
+tau = .02 #step size 
+w_2 = w_1 - tau*gradf_1 #w2
 f_2 = la.norm(y-X@w_2)**2
 gradf_2 = 2*X.T@(X@w_2-y)
 tangent_2 = f_2 + gradf_2@(w-w_2)
@@ -138,7 +140,7 @@ plt.show()
 6. 똑같이 스텝 사이즈 tau를 0.02로 설정하고 5번을 반복하며 최적의 가중치 벡터를 구하는 코드를 for 문을 통해 구현 후 그래프로 그린다.
 
 ```python
-tau = .02 # step size
+tau = .02 #step size
 max_iter = 5
 w_hat = np.matrix(np.zeros((max_iter+1,1)))
 f_hat = np.matrix(np.zeros((max_iter+1,1)))

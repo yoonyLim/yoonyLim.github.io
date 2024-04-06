@@ -58,7 +58,7 @@ $$ C = \begin{bmatrix} 1 & 0 & \dots & 0 \\\\ 0 & 1 & \dots & 0 \\\\ \vdots & \v
 
 $$ \underline{\hat{y}} = X (X^T X)^{-1} X^T \underline{y} = U (U^T U)^{-1} U^T \underline{y} $$
 
-이때 $U^T U = I$이므로 $\underline{\hat{y}} = U (I)^{-1} U^T \underline{y} = U U^T \underline{y}$로서 표현이 가능하며 더 적은 연산으로 예측 레이블 계산이 가능해졌다!
+이때 $U^T U = I$이므로 $\underline{\hat{y}} = U (I)^{-1} U^T \underline{y} = U U^T \underline{y}$로 표현이 가능하며 더 적은 연산으로 예측 레이블 계산이 가능해졌다!
 
 ***주의: $U^T U = I$인 것은 자명하나, $U U^T$는 직교 행렬 $U$가 정방행렬일 때에만 단위 행렬 $I$ 값이 나온다.***
 

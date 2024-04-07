@@ -21,7 +21,7 @@ export default function PostPage(props: any) {
                 const numHashInH = post.content.match(rgx)![i].match(/#/g)!.length;
 
                 headingNavs.push(
-                    <div className="flex">
+                    <div key={i} className="flex">
                         { Array.from({ length: numHashInH - 1 }, (_, i) => <span key={i} className="mr-4"></span>) }
                         <a 
                             href={'#' + post.content.match(rgx)![i].replaceAll('#', ' ').trim()}

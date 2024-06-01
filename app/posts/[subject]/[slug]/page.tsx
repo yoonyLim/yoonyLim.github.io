@@ -53,7 +53,7 @@ export default function PostPage(props: any) {
                     <h1 className="my-4">작성일: { post.data.date }</h1>
                     <h1>{ post.data.subject }</h1>
                     {/* class "prose" is to revert tailwindcss in markdowns */}
-                    <article className="prose max-w-none dark:text-white dark:prose-invert">
+                    <article className="prose w-full dark:text-white dark:prose-invert">
                         <Markdown options={{
                                 slugify: str => str,
                                 overrides: {

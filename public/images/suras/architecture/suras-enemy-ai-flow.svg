@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760" role="img" aria-labelledby="title desc">
+  <title id="title">SuraS 적 AI 상태 흐름</title>
+  <desc id="desc">AI Perception, Blackboard 상태, 추격 토큰, 공격 토큰, 협동 공격과 등반 이동의 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f2937" />
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 34px Arial, "Noto Sans KR", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px Arial, "Noto Sans KR", sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 16; }
+      .state { fill: #ecfeff; stroke: #06b6d4; stroke-width: 2; rx: 18; }
+      .action { fill: #fef3c7; stroke: #f59e0b; stroke-width: 2; rx: 18; }
+      .danger { fill: #fee2e2; stroke: #ef4444; stroke-width: 2; rx: 18; }
+      .ok { fill: #dcfce7; stroke: #22c55e; stroke-width: 2; rx: 18; }
+      .h { font: 700 19px Arial, "Noto Sans KR", sans-serif; fill: #111827; }
+      .t { font: 500 14px Arial, "Noto Sans KR", sans-serif; fill: #374151; }
+      .small { font: 500 13px Arial, "Noto Sans KR", sans-serif; fill: #475569; }
+      .arrow { stroke: #1f2937; stroke-width: 2.1; fill: none; marker-end: url(#arrow); }
+      .dashed { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; marker-end: url(#arrow); }
+      .label { font: 700 13px Arial, "Noto Sans KR", sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1120" height="760" />
+  <text x="48" y="58" class="title">적 AI 상태 흐름</text>
+  <text x="48" y="86" class="subtitle">Behavior Tree는 상태를 실행하고, AI Controller는 Blackboard 상태와 토큰을 갱신한다</text>
+
+  <rect x="60" y="138" width="210" height="110" class="box" />
+  <text x="88" y="174" class="h">스폰 / Possess</text>
+  <text x="88" y="204" class="t">Behavior Tree 실행</text>
+  <text x="88" y="226" class="small">DataTable로 시야/공격값 초기화</text>
+
+  <rect x="330" y="138" width="210" height="110" class="state" />
+  <text x="358" y="174" class="h">Passive</text>
+  <text x="358" y="204" class="t">순찰 또는 대기</text>
+  <text x="358" y="226" class="small">AI Perception 감지 대기</text>
+
+  <rect x="600" y="138" width="210" height="110" class="state" />
+  <text x="628" y="174" class="h">Chase / Pursue</text>
+  <text x="628" y="204" class="t">플레이어 추격</text>
+  <text x="628" y="226" class="small">Pursuit Token으로 자리 배정</text>
+
+  <rect x="870" y="138" width="210" height="110" class="danger" />
+  <text x="898" y="174" class="h">Attacking</text>
+  <text x="898" y="204" class="t">공격 가능 상태</text>
+  <text x="898" y="226" class="small">Attack Token 예약 후 공격</text>
+
+  <rect x="600" y="334" width="210" height="110" class="action" />
+  <text x="628" y="370" class="h">Climbing</text>
+  <text x="628" y="400" class="t">NavLink 기반 등반</text>
+  <text x="628" y="422" class="small">벽 오르기 / Traverse</text>
+
+  <rect x="870" y="334" width="210" height="110" class="action" />
+  <text x="898" y="370" class="h">CoopAttacking</text>
+  <text x="898" y="400" class="t">동료 던지기</text>
+  <text x="898" y="422" class="small">Motion Warping Target 갱신</text>
+
+  <rect x="330" y="530" width="210" height="110" class="ok" />
+  <text x="358" y="566" class="h">Damaged</text>
+  <text x="358" y="596" class="t">피격 반응</text>
+  <text x="358" y="618" class="small">Hit Montage 후 추격 복귀</text>
+
+  <rect x="600" y="530" width="210" height="110" class="danger" />
+  <text x="628" y="566" class="h">Dead</text>
+  <text x="628" y="596" class="t">BT 정지 / 토큰 반환</text>
+  <text x="628" y="618" class="small">Dissolve, Kill Log, Destroy</text>
+
+  <rect x="60" y="530" width="210" height="110" class="box" />
+  <text x="88" y="566" class="h">플레이어 토큰</text>
+  <text x="88" y="596" class="t">UACPlayerAttackTokens</text>
+  <text x="88" y="618" class="small">동시 추격/공격 수 제한</text>
+
+  <path class="arrow" d="M270 193 L330 193" />
+  <path class="arrow" d="M540 193 L600 193" />
+  <path class="arrow" d="M810 193 L870 193" />
+  <path class="dashed" d="M705 248 L705 334" />
+  <path class="dashed" d="M975 248 L975 334" />
+  <path class="arrow" d="M870 398 C805 460 760 492 705 530" />
+  <path class="arrow" d="M600 585 L540 585" />
+  <path class="arrow" d="M600 585 C545 480 500 300 600 228" />
+  <path class="dashed" d="M270 585 L330 585" />
+  <path class="dashed" d="M270 585 C500 500 710 282 870 205" />
+
+  <text x="282" y="182" class="label">BT 시작</text>
+  <text x="552" y="182" class="label">플레이어 감지</text>
+  <text x="820" y="182" class="label">거리 조건</text>
+  <text x="720" y="304" class="label">벽/링크 필요</text>
+  <text x="988" y="304" class="label">동료 필요</text>
+  <text x="782" y="494" class="label">피격 / 사망</text>
+  <text x="548" y="618" class="label">OnDeath</text>
+  <text x="365" y="510" class="label">OnDamaged</text>
+  <text x="330" y="318" class="label">토큰 실패 시 Chase, 성공 시 Pursue/Attack</text>
+</svg>

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720" role="img" aria-labelledby="title desc">
+  <title id="title">SuraS 시스템 아키텍처</title>
+  <desc id="desc">SuraS의 플레이어, 무기, 적 AI, 데미지, UI, 게임플로우 모듈 관계도</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155" />
+    </marker>
+    <style>
+      .bg { fill: #0f172a; }
+      .panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 16; }
+      .panelDark { fill: #e2e8f0; stroke: #94a3b8; stroke-width: 2; rx: 14; }
+      .title { font: 700 34px Arial, "Noto Sans KR", sans-serif; fill: #f8fafc; }
+      .subtitle { font: 500 16px Arial, "Noto Sans KR", sans-serif; fill: #cbd5e1; }
+      .h { font: 700 20px Arial, "Noto Sans KR", sans-serif; fill: #0f172a; }
+      .t { font: 500 15px Arial, "Noto Sans KR", sans-serif; fill: #334155; }
+      .small { font: 500 13px Arial, "Noto Sans KR", sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .dashed { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; marker-end: url(#arrow); }
+      .label { font: 700 13px Arial, "Noto Sans KR", sans-serif; fill: #0f172a; }
+      .accentBlue { fill: #dbeafe; stroke: #60a5fa; }
+      .accentGreen { fill: #dcfce7; stroke: #4ade80; }
+      .accentOrange { fill: #ffedd5; stroke: #fb923c; }
+      .accentPink { fill: #fce7f3; stroke: #f472b6; }
+      .accentPurple { fill: #ede9fe; stroke: #a78bfa; }
+      .accentYellow { fill: #fef9c3; stroke: #facc15; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1120" height="720" />
+  <text x="48" y="58" class="title">SuraS 시스템 아키텍처</text>
+  <text x="48" y="86" class="subtitle">1인칭 Hyper FPS를 구성하는 Pawn Movement, Weapon, Enemy AI, Damage, UI/GameFlow 계층</text>
+
+  <rect x="46" y="122" width="232" height="154" class="panel accentBlue" />
+  <text x="70" y="158" class="h">입력 / 플레이어 Pawn</text>
+  <text x="70" y="190" class="t">ASuraPawnPlayer</text>
+  <text x="70" y="216" class="small">Enhanced Input</text>
+  <text x="70" y="238" class="small">Capsule, Camera, Arm Mesh</text>
+
+  <rect x="330" y="116" width="252" height="170" class="panel accentGreen" />
+  <text x="354" y="152" class="h">자체 Pawn Movement</text>
+  <text x="354" y="184" class="t">USuraPlayerMovementComponent</text>
+  <text x="354" y="210" class="small">Move / Airborne / WallRun</text>
+  <text x="354" y="232" class="small">Slide / Mantle / Downed / Dead</text>
+  <text x="354" y="254" class="small">DataTable 기반 수치 조정</text>
+
+  <rect x="330" y="330" width="252" height="166" class="panel accentOrange" />
+  <text x="354" y="366" class="h">무기 시스템</text>
+  <text x="354" y="398" class="t">UWeaponSystemComponent</text>
+  <text x="354" y="424" class="small">Weapon Inventory / Pickup</text>
+  <text x="354" y="446" class="small">Idle, Fire, Reload, Charge</text>
+  <text x="354" y="468" class="small">Camera Aim / Scene Capture</text>
+
+  <rect x="646" y="116" width="250" height="170" class="panel accentPink" />
+  <text x="670" y="152" class="h">적 AI 계층</text>
+  <text x="670" y="184" class="t">AEnemyBaseAIController</text>
+  <text x="670" y="210" class="small">AI Perception</text>
+  <text x="670" y="232" class="small">Behavior Tree / Blackboard</text>
+  <text x="670" y="254" class="small">Pursue, Chase, Attack, Coop</text>
+
+  <rect x="646" y="330" width="250" height="166" class="panel accentPurple" />
+  <text x="670" y="366" class="h">전투 / 데미지</text>
+  <text x="670" y="398" class="t">UACDamageSystem</text>
+  <text x="670" y="424" class="small">UACEnemyDamageSystem</text>
+  <text x="670" y="446" class="small">FDamageData, OnDamaged</text>
+  <text x="670" y="468" class="small">부위 파괴 / 사망 이벤트</text>
+
+  <rect x="46" y="538" width="252" height="126" class="panel accentYellow" />
+  <text x="70" y="574" class="h">UI / 피드백</text>
+  <text x="70" y="606" class="t">UACUIMangerComponent</text>
+  <text x="70" y="632" class="small">HUD, Kill Log, Hit Screen</text>
+
+  <rect x="374" y="538" width="252" height="126" class="panelDark" />
+  <text x="398" y="574" class="h">게임 흐름 / 저장</text>
+  <text x="398" y="606" class="t">SuraLevelGameMode</text>
+  <text x="398" y="632" class="small">CheckpointSubsystem / SaveGame</text>
+
+  <rect x="702" y="538" width="302" height="126" class="panelDark" />
+  <text x="726" y="574" class="h">데이터 / 레벨 유틸리티</text>
+  <text x="726" y="606" class="t">DataTable, PatrolRoute, NavLink</text>
+  <text x="726" y="632" class="small">EnemyClimb / Jump / Traverse Link</text>
+
+  <path class="arrow" d="M278 190 C300 190 304 190 330 190" />
+  <path class="arrow" d="M278 225 C306 270 315 360 330 404" />
+  <path class="arrow" d="M582 194 C612 194 618 194 646 194" />
+  <path class="arrow" d="M582 413 C612 413 618 413 646 413" />
+  <path class="arrow" d="M771 286 L771 330" />
+  <path class="arrow" d="M646 450 C612 526 540 538 500 538" />
+  <path class="arrow" d="M330 460 C250 520 205 538 172 538" />
+  <path class="dashed" d="M771 496 L838 538" />
+  <path class="dashed" d="M500 538 C540 505 590 488 646 458" />
+  <path class="dashed" d="M853 538 C828 480 821 360 771 286" />
+
+  <text x="290" y="178" class="label">입력 벡터</text>
+  <text x="300" y="326" class="label">발사 / 조준</text>
+  <text x="596" y="178" class="label">플레이어 위치</text>
+  <text x="604" y="399" class="label">피격 데이터</text>
+  <text x="786" y="315" class="label">공격 판정</text>
+  <text x="544" y="528" class="label">체력 / 사망</text>
+  <text x="230" y="530" class="label">HUD 이벤트</text>
+  <text x="874" y="522" class="label">순찰 / 등반 경로</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">SOW 가차, 터렛, GAS 전투 루프</title>
+  <desc id="desc">희귀도 기반 랜덤 소환에서 타일 배치, 터렛 ASC 초기화, 시너지 태그, Gameplay Ability와 Effect, 적 사망 보상까지 이어지는 루프</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #475569; }
+      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .rng { fill: #f0fdf4; stroke: #86efac; }
+      .turret { fill: #eff6ff; stroke: #93c5fd; }
+      .gas { fill: #faf5ff; stroke: #d8b4fe; }
+      .enemy { fill: #fff1f2; stroke: #fda4af; }
+      .economy { fill: #fffbeb; stroke: #fbbf24; }
+      .head { font: 700 17px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .body { font: 500 13px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #334155; }
+      .code { font: 600 12px Consolas, "Courier New", monospace; fill: #0f172a; }
+      .arrow { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .arrow-teal { stroke: #0f766e; stroke-width: 2.5; fill: none; marker-end: url(#arrowTeal); }
+      .dash { stroke-dasharray: 7 6; }
+      .label { font: 700 12px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f766e; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+  <text class="title" x="56" y="56">가차, 터렛, GAS 전투 루프</text>
+  <text class="subtitle" x="56" y="84">랜덤 소환의 결과가 터렛 배치, 시너지 태그, GameplayEffect, 적 사망 보상으로 이어지는 구조</text>
+
+  <rect class="node economy" x="56" y="128" width="230" height="112"/>
+  <text class="head" x="78" y="160">스테이지 재화</text>
+  <text class="code" x="78" y="188">AWaveGameMode</text>
+  <text class="body" x="78" y="216">소환 비용과 터렛 수 제한 확인</text>
+
+  <rect class="node rng" x="366" y="128" width="230" height="112"/>
+  <text class="head" x="388" y="160">가중치 랜덤</text>
+  <text class="code" x="388" y="188">GachaRNG</text>
+  <text class="body" x="388" y="216">희귀도 index와 pool index 선택</text>
+
+  <rect class="node rng" x="676" y="128" width="230" height="112"/>
+  <text class="head" x="698" y="160">소환 데이터</text>
+  <text class="code" x="698" y="188">FSummonData</text>
+  <text class="body" x="698" y="216">터렛 클래스, 희귀도, 속성, 프로필</text>
+
+  <rect class="node turret" x="56" y="330" width="260" height="126"/>
+  <text class="head" x="78" y="362">타일 배치</text>
+  <text class="code" x="78" y="390">USummonManager</text>
+  <text class="code" x="78" y="412">ATileBase</text>
+  <text class="body" x="78" y="440">Available 타일에 SpawnActor 후 Occupied</text>
+
+  <rect class="node turret" x="400" y="330" width="260" height="126"/>
+  <text class="head" x="422" y="362">터렛 Actor 구성</text>
+  <text class="code" x="422" y="390">SOWCharacterTurretBase</text>
+  <text class="code" x="422" y="412">Combat / Skill / Evolution</text>
+  <text class="body" x="422" y="440">AIController possess, 공격 범위와 UI delegate</text>
+
+  <rect class="node gas" x="744" y="330" width="260" height="126"/>
+  <text class="head" x="766" y="362">ASC 초기화</text>
+  <text class="code" x="766" y="390">StartupDataTurret</text>
+  <text class="code" x="766" y="412">SOWAttributeSet</text>
+  <text class="body" x="766" y="440">공격력, 사거리, 속도, 태그 바인딩</text>
+
+  <rect class="node gas" x="136" y="552" width="260" height="126"/>
+  <text class="head" x="158" y="584">시너지 태그</text>
+  <text class="code" x="158" y="612">TurretSynergyManager</text>
+  <text class="body" x="158" y="640">속성별 터렛 수와 희귀도 조건 확인</text>
+  <text class="body" x="158" y="662">Loose GameplayTag 부여 / 제거</text>
+
+  <rect class="node gas" x="470" y="552" width="260" height="126"/>
+  <text class="head" x="492" y="584">능력 / 효과 실행</text>
+  <text class="code" x="492" y="612">GameplayAbility</text>
+  <text class="code" x="492" y="634">GameplayEffect / GEEC</text>
+  <text class="body" x="492" y="662">데미지와 버프 계산을 공통 규칙으로 처리</text>
+
+  <rect class="node enemy" x="804" y="552" width="260" height="126"/>
+  <text class="head" x="826" y="584">적 반응 / 보상</text>
+  <text class="code" x="826" y="612">SOWCharacterEnemyBase</text>
+  <text class="code" x="826" y="634">OnEnemyDeath</text>
+  <text class="body" x="826" y="662">체력 감소, 사망, shard 보상 방송</text>
+
+  <path class="arrow" d="M286 184 C310 184 342 184 366 184"/>
+  <path class="arrow" d="M596 184 C620 184 652 184 676 184"/>
+  <path class="arrow" d="M791 240 C736 292 382 292 226 330"/>
+  <path class="arrow" d="M316 393 C340 393 376 393 400 393"/>
+  <path class="arrow" d="M660 393 C684 393 720 393 744 393"/>
+  <path class="arrow-teal" d="M874 456 C838 508 520 514 326 552"/>
+  <path class="arrow-teal" d="M396 615 C420 615 446 615 470 615"/>
+  <path class="arrow" d="M730 615 C754 615 780 615 804 615"/>
+  <path class="arrow dash" d="M934 552 C970 468 1000 220 906 184"/>
+  <path class="arrow dash" d="M804 654 C650 726 184 724 132 240"/>
+
+  <text class="label" x="306" y="170">소환 요청</text>
+  <text class="label" x="616" y="170">결과 선택</text>
+  <text class="label" x="436" y="282">터렛 클래스 결정</text>
+  <text class="label" x="328" y="380">SpawnActor</text>
+  <text class="label" x="680" y="380">PossessedBy</text>
+  <text class="label" x="578" y="500">속성 / 희귀도 반영</text>
+  <text class="label" x="742" y="602">피해 적용</text>
+  <text class="label" x="958" y="444">다음 소환 압박</text>
+  <text class="label" x="472" y="708">재화 반환</text>
+</svg>

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">SOW 웨이브와 적 루트 처리 흐름</title>
+  <desc id="desc">웨이브 데이터에서 적 스폰, 루트 선택, Behavior Tree 이동, Core Rune 피해 또는 처치 보상까지 이어지는 흐름</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#be123c"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#15803d"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #475569; }
+      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .data { fill: #eff6ff; stroke: #93c5fd; }
+      .route { fill: #f1f5f9; stroke: #94a3b8; }
+      .ai { fill: #fff1f2; stroke: #fda4af; }
+      .success { fill: #f0fdf4; stroke: #86efac; }
+      .danger { fill: #fffbeb; stroke: #fbbf24; }
+      .head { font: 700 17px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .body { font: 500 13px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #334155; }
+      .code { font: 600 12px Consolas, "Courier New", monospace; fill: #0f172a; }
+      .arrow { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .arrow-red { stroke: #be123c; stroke-width: 2.5; fill: none; marker-end: url(#arrowRed); }
+      .arrow-green { stroke: #15803d; stroke-width: 2.5; fill: none; marker-end: url(#arrowGreen); }
+      .dash { stroke-dasharray: 7 6; }
+      .label { font: 700 12px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="720"/>
+  <text class="title" x="56" y="56">웨이브와 적 루트 처리 흐름</text>
+  <text class="subtitle" x="56" y="84">DataTable 기반 웨이브가 스폰, 경로 추적, Core Rune 피해, 처치 보상으로 이어지는 과정</text>
+
+  <rect class="node data" x="56" y="130" width="230" height="118"/>
+  <text class="head" x="78" y="162">웨이브 데이터</text>
+  <text class="code" x="78" y="190">FWaveInfo</text>
+  <text class="code" x="78" y="212">FMonsterSpawnData</text>
+  <text class="body" x="78" y="236">적 종류, 수, 스폰 시간, 지점</text>
+
+  <rect class="node danger" x="354" y="130" width="230" height="118"/>
+  <text class="head" x="376" y="162">스테이지 진행</text>
+  <text class="code" x="376" y="190">AWaveGameMode</text>
+  <text class="body" x="376" y="218">재화, 터렛 수, HUD 이벤트</text>
+  <text class="body" x="376" y="240">웨이브 종료 상태 관리</text>
+
+  <rect class="node route" x="652" y="130" width="230" height="118"/>
+  <text class="head" x="674" y="162">타일과 진입 경로</text>
+  <text class="code" x="674" y="190">SOWTileSpawner</text>
+  <text class="code" x="674" y="212">AEnemyIncomingRoute</text>
+  <text class="body" x="674" y="236">스폰 지점과 spline route 제공</text>
+
+  <rect class="node ai" x="950" y="130" width="194" height="118"/>
+  <text class="head" x="972" y="162">적 생성</text>
+  <text class="code" x="972" y="190">SOWCharacterEnemyBase</text>
+  <text class="body" x="972" y="218">DataTable로 능력치 로드</text>
+  <text class="body" x="972" y="240">가장 가까운 루트 선택</text>
+
+  <rect class="node ai" x="110" y="350" width="260" height="126"/>
+  <text class="head" x="132" y="382">AI Controller</text>
+  <text class="code" x="132" y="410">EnemyBaseAIController</text>
+  <text class="body" x="132" y="438">Blackboard 초기화</text>
+  <text class="body" x="132" y="460">State = FollowingIncomingRoute</text>
+
+  <rect class="node route" x="470" y="350" width="260" height="126"/>
+  <text class="head" x="492" y="382">루트 인덱스 추적</text>
+  <text class="code" x="492" y="410">EnemyIncomingRouteComponent</text>
+  <text class="body" x="492" y="438">현재 spline point 위치 반환</text>
+  <text class="body" x="492" y="460">도착하면 다음 인덱스로 진행</text>
+
+  <rect class="node ai" x="830" y="350" width="260" height="126"/>
+  <text class="head" x="852" y="382">Behavior Tree Task</text>
+  <text class="code" x="852" y="410">BTT_FollowIncomingRoute</text>
+  <text class="code" x="852" y="432">BTT_MoveAlongRoute</text>
+  <text class="body" x="852" y="460">경로 종료 시 Attacking 상태 전환</text>
+
+  <rect class="node success" x="250" y="568" width="260" height="98"/>
+  <text class="head" x="272" y="600">처치 성공</text>
+  <text class="code" x="272" y="628">OnEnemyDeath.Broadcast</text>
+  <text class="body" x="272" y="650">Shard 보상과 UI, 웨이브 진행 갱신</text>
+
+  <rect class="node danger" x="690" y="568" width="260" height="98"/>
+  <text class="head" x="712" y="600">방어 실패</text>
+  <text class="code" x="712" y="628">CoreRune DamageEffect</text>
+  <text class="body" x="712" y="650">보상 없이 Core Rune 체력 감소</text>
+
+  <path class="arrow" d="M286 189 C310 189 330 189 354 189"/>
+  <path class="arrow" d="M584 189 C610 189 626 189 652 189"/>
+  <path class="arrow" d="M882 189 C908 189 924 189 950 189"/>
+  <path class="arrow" d="M1047 248 C1047 302 316 302 260 350"/>
+  <path class="arrow" d="M370 413 C400 413 440 413 470 413"/>
+  <path class="arrow" d="M730 413 C760 413 800 413 830 413"/>
+  <path class="arrow-red" d="M960 476 C940 520 884 548 820 568"/>
+  <path class="arrow-green dash" d="M830 476 C722 536 548 552 432 568"/>
+  <path class="arrow-red dash" d="M950 625 C1008 596 1028 522 1012 476"/>
+
+  <text class="label" x="308" y="174">웨이브 행 읽기</text>
+  <text class="label" x="602" y="174">스폰 지점 참조</text>
+  <text class="label" x="904" y="174">SpawnActor</text>
+  <text class="label" x="488" y="288">Possess 이후 BT 실행</text>
+  <text class="label" x="746" y="396">현재 목표 위치</text>
+  <text class="label" x="904" y="526">Core Rune 도달</text>
+  <text class="label" x="558" y="542">터렛에게 처치됨</text>
+</svg>

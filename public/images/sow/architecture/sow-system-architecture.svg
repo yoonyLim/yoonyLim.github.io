@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">SOW 전체 시스템 아키텍처</title>
+  <desc id="desc">SOW의 플레이어 UI, GameInstance 매니저, WaveGameMode, 타일/경로, 가차/터렛, 적 AI, GAS 전투, Core Rune의 상호작용을 나타낸 다이어그램</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrowAccent" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 15px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+      .box-blue { fill: #eff6ff; stroke: #93c5fd; }
+      .box-teal { fill: #f0fdfa; stroke: #5eead4; }
+      .box-amber { fill: #fffbeb; stroke: #fbbf24; }
+      .box-rose { fill: #fff1f2; stroke: #fda4af; }
+      .box-green { fill: #f0fdf4; stroke: #86efac; }
+      .box-purple { fill: #faf5ff; stroke: #d8b4fe; }
+      .box-slate { fill: #f1f5f9; stroke: #94a3b8; }
+      .head { font: 700 18px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .body { font: 500 13px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #334155; }
+      .code { font: 600 12px Consolas, "Courier New", monospace; fill: #0f172a; }
+      .arrow { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .arrow-accent { stroke: #0f766e; stroke-width: 2.5; fill: none; marker-end: url(#arrowAccent); }
+      .arrow-dash { stroke: #64748b; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+      .label { font: 600 12px "Pretendard", "Noto Sans KR", Arial, sans-serif; fill: #0f766e; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="780"/>
+  <text class="title" x="56" y="56">SOW 시스템 아키텍처</text>
+  <text class="subtitle" x="56" y="84">운빨 가차 랜덤 디펜스를 웨이브, 가차, 타일, 적 AI, GAS 전투 규칙으로 분리한 구조</text>
+
+  <rect class="box box-blue" x="56" y="122" width="250" height="140"/>
+  <text class="head" x="78" y="154">플레이어 / UI</text>
+  <text class="code" x="78" y="182">ASOWPlayerController</text>
+  <text class="code" x="78" y="204">PlayerHUD, Shop, Skill</text>
+  <text class="body" x="78" y="232">소환 입력, 타일 선택, 재화와</text>
+  <text class="body" x="78" y="252">웨이브 상태를 화면에 표시</text>
+
+  <rect class="box box-teal" x="362" y="122" width="318" height="140"/>
+  <text class="head" x="384" y="154">GameInstance 매니저</text>
+  <text class="code" x="384" y="182">USOWGameInstance</text>
+  <text class="code" x="384" y="204">Summon / Currency / Skill</text>
+  <text class="code" x="384" y="226">TurretSynergy / Sound</text>
+  <text class="body" x="384" y="252">장기 생명주기 시스템을 초기화하고 공유</text>
+
+  <rect class="box box-amber" x="736" y="122" width="250" height="140"/>
+  <text class="head" x="758" y="154">WaveGameMode</text>
+  <text class="code" x="758" y="182">AWaveGameMode</text>
+  <text class="body" x="758" y="210">현재 스테이지 재화</text>
+  <text class="body" x="758" y="232">터렛 수 제한</text>
+  <text class="body" x="758" y="254">Core Rune HUD 이벤트</text>
+
+  <rect class="box box-slate" x="56" y="330" width="250" height="150"/>
+  <text class="head" x="78" y="362">맵 / 타일 / 경로</text>
+  <text class="code" x="78" y="390">SOWTileSpawner</text>
+  <text class="code" x="78" y="412">TileBase</text>
+  <text class="code" x="78" y="434">EnemyIncomingRoute</text>
+  <text class="body" x="78" y="462">배치 가능 타일과 적 진입 루트 생성</text>
+
+  <rect class="box box-green" x="362" y="330" width="318" height="150"/>
+  <text class="head" x="384" y="362">가차 / 터렛</text>
+  <text class="code" x="384" y="390">GachaRNG</text>
+  <text class="code" x="384" y="412">USummonManager</text>
+  <text class="code" x="384" y="434">ASOWCharacterTurretBase</text>
+  <text class="body" x="384" y="462">희귀도 풀에서 터렛을 뽑고 타일에 배치</text>
+
+  <rect class="box box-rose" x="736" y="330" width="250" height="150"/>
+  <text class="head" x="758" y="362">적 AI</text>
+  <text class="code" x="758" y="390">SOWCharacterEnemyBase</text>
+  <text class="code" x="758" y="412">EnemyBaseAIController</text>
+  <text class="code" x="758" y="434">BehaviorTree / Blackboard</text>
+  <text class="body" x="758" y="462">루트를 따라 진입하고 목표를 공격</text>
+
+  <rect class="box box-purple" x="232" y="548" width="300" height="150"/>
+  <text class="head" x="254" y="580">GAS 전투 규칙</text>
+  <text class="code" x="254" y="608">USOWAbilitySystemComponent</text>
+  <text class="code" x="254" y="630">USOWAttributeSet</text>
+  <text class="code" x="254" y="652">GameplayAbility / Effect</text>
+  <text class="body" x="254" y="680">피해, 버프, 디버프, 능력치 변경을 표준화</text>
+
+  <rect class="box box-amber" x="630" y="548" width="300" height="150"/>
+  <text class="head" x="652" y="580">Core Rune / 승패 조건</text>
+  <text class="code" x="652" y="608">ASOWCharacterCoreRune</text>
+  <text class="body" x="652" y="636">적 도달 시 GAS 피해 적용</text>
+  <text class="body" x="652" y="658">체력, 보호막, 파괴 이벤트 방송</text>
+  <text class="body" x="652" y="680">방어 실패를 게임 흐름으로 연결</text>
+
+  <path class="arrow" d="M306 174 C326 174 340 174 362 174"/>
+  <path class="arrow" d="M680 174 C704 174 716 174 736 174"/>
+  <path class="arrow" d="M181 262 C181 292 181 306 181 330"/>
+  <path class="arrow-accent" d="M521 262 C521 292 521 306 521 330"/>
+  <path class="arrow" d="M861 262 C861 292 861 306 861 330"/>
+  <path class="arrow" d="M306 405 C326 405 340 405 362 405"/>
+  <path class="arrow" d="M680 405 C704 405 716 405 736 405"/>
+  <path class="arrow-accent" d="M521 480 C504 514 470 532 430 548"/>
+  <path class="arrow-accent" d="M861 480 C840 516 810 532 780 548"/>
+  <path class="arrow" d="M736 622 C668 622 600 622 532 622"/>
+  <path class="arrow-dash" d="M630 642 C590 672 548 682 532 682"/>
+  <path class="arrow" d="M780 548 C780 520 780 504 780 480"/>
+  <path class="arrow-dash" d="M382 548 C324 514 270 498 220 480"/>
+  <path class="arrow-dash" d="M930 622 C1014 622 1044 236 986 202"/>
+
+  <text class="label" x="326" y="164">입력 / 요청</text>
+  <text class="label" x="697" y="164">상태 공유</text>
+  <text class="label" x="537" y="304">소환</text>
+  <text class="label" x="878" y="304">스폰</text>
+  <text class="label" x="300" y="392">타일 점유</text>
+  <text class="label" x="690" y="392">공격 대상</text>
+  <text class="label" x="548" y="525">능력치 / 태그</text>
+  <text class="label" x="920" y="518">도달 피해</text>
+</svg>
